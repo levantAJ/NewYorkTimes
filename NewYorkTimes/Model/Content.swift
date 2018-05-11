@@ -9,9 +9,9 @@
 import Foundation
 
 struct Content {
-    var id: String
+    var title: String
+    var abstract: String
     var url: URL?
     var imageURL: URL?
-    var snippet: String
     var date: Date
 }

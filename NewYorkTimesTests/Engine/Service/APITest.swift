@@ -6,8 +6,8 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
-@testable import NewYorkTimes
 import XCTest
+@testable import NewYorkTimes
 
 class APITest: XCTestCase {
     
