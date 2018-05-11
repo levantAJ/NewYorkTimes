@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33B5832620A5EAA300C5196B /* ContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B5832520A5EAA300C5196B /* ContentTest.swift */; };
 		33F6712620A5BE2C000C7BB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6712520A5BE2C000C7BB5 /* AppDelegate.swift */; };
 		33F6712B20A5BE2C000C7BB5 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33F6712920A5BE2C000C7BB5 /* Home.storyboard */; };
 		33F6712D20A5BE2D000C7BB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33F6712C20A5BE2D000C7BB5 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		33B5832520A5EAA300C5196B /* ContentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTest.swift; sourceTree = "<group>"; };
 		33F6712220A5BE2C000C7BB5 /* NewYorkTimes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewYorkTimes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33F6712520A5BE2C000C7BB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33F6712A20A5BE2C000C7BB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
@@ -88,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33B5832420A5EA7C00C5196B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				33B5832520A5EAA300C5196B /* ContentTest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		33F6711920A5BE2C000C7BB5 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				33F6715F20A5C746000C7BB5 /* Engine */,
+				33B5832420A5EA7C00C5196B /* Model */,
 				33F6713C20A5BE2D000C7BB5 /* Info.plist */,
 			);
 			path = NewYorkTimesTests;
@@ -399,6 +410,7 @@
 			files = (
 				33F6717220A5DB27000C7BB5 /* MappingTest.swift in Sources */,
 				33F6716520A5C7B8000C7BB5 /* APITest.swift in Sources */,
+				33B5832620A5EAA300C5196B /* ContentTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

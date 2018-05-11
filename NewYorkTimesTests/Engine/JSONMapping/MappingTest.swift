@@ -9,6 +9,24 @@
 import XCTest
 @testable import NewYorkTimes
 
+struct MappableObjectA: Mappable {
+    var string: String?
+    
+    mutating func mapping(map: Mapping) {
+        string = map["string"]
+    }
+}
+
+struct MappableObjectB: Mappable {
+    var object: MappableObjectA?
+    var array: [MappableObjectA]?
+    
+    mutating func mapping(map: Mapping) {
+        object = map["object"]
+        array = map["array"]
+    }
+}
+
 class MappingTest: XCTestCase {
     
     var sut: Mapping!
@@ -55,5 +73,39 @@ class MappingTest: XCTestCase {
         
         //When:
         XCTAssertNotNil(sut["date", .custom(format: "dd/MM/yyyy")])
+    }
+    
+    func testMappingMappableObject() {
+        //Given:
+        let string1 = "string1"
+        let string2 = "string2"
+        let string3 = "string3"
+        let string4 = "string4"
+        
+        sut = Mapping(json: ["value": [
+            "object": ["string": string1],
+            "array": [
+                ["string": string2],
+                ["string": string3],
+                ["string": string4],
+            ]
+            ]
+            ])
+        
+        //When:
+        let actualObjectB: MappableObjectB? = sut["value"]
+        XCTAssertNotNil(actualObjectB)
+        guard let objectB = actualObjectB else { return }
+        XCTAssertNotNil(objectB.object)
+        if let objectA = objectB.object {
+            XCTAssertEqual(objectA.string, string1)
+        }
+        XCTAssertNotNil(objectB.array)
+        if let array = objectB.array {
+            XCTAssertEqual(array.count, 3)
+            XCTAssertEqual(array[0].string, string2)
+            XCTAssertEqual(array[1].string, string3)
+            XCTAssertEqual(array[2].string, string4)
+        }
     }
 }
