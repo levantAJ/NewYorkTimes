@@ -15,6 +15,7 @@
 		33F6715C20A5C18D000C7BB5 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6715B20A5C18D000C7BB5 /* Constant.swift */; };
 		33F6715E20A5C1E3000C7BB5 /* BaseServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6715D20A5C1E3000C7BB5 /* BaseServiceApi.swift */; };
 		33F6716520A5C7B8000C7BB5 /* APITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6716420A5C7B8000C7BB5 /* APITest.swift */; };
+		33F6716720A5CA76000C7BB5 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6716620A5CA76000C7BB5 /* Content.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		33F6715B20A5C18D000C7BB5 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		33F6715D20A5C1E3000C7BB5 /* BaseServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseServiceApi.swift; sourceTree = "<group>"; };
 		33F6716420A5C7B8000C7BB5 /* APITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITest.swift; sourceTree = "<group>"; };
+		33F6716620A5CA76000C7BB5 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		33F6715520A5C026000C7BB5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33F6716620A5CA76000C7BB5 /* Content.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F6716720A5CA76000C7BB5 /* Content.swift in Sources */,
 				33F6715E20A5C1E3000C7BB5 /* BaseServiceApi.swift in Sources */,
 				33F6712620A5BE2C000C7BB5 /* AppDelegate.swift in Sources */,
 				33F6715C20A5C18D000C7BB5 /* Constant.swift in Sources */,
