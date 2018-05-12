@@ -37,6 +37,16 @@ extension ArticleDetailViewController: UITableViewDataSource {
             cell.set(viewModel: itemViewModel)
             return cell
         }
+        if let itemViewModel = itemViewModel as? ArticleAggregateTableViewCellViewModel {
+            let cell = tableView.dequeueReusableCell(type: ArticleAggregateTableViewCell.self, for: indexPath)
+            cell.set(viewModel: itemViewModel)
+            return cell
+        }
+        if let itemViewModel = itemViewModel as? ArticleSnippetTableViewCellViewModel {
+            let cell = tableView.dequeueReusableCell(type: ArticleSnippetTableViewCell.self, for: indexPath)
+            cell.set(viewModel: itemViewModel)
+            return cell
+        }
         return UITableViewCell()
     }
 }
@@ -46,8 +56,11 @@ extension ArticleDetailViewController: UITableViewDataSource {
 extension ArticleDetailViewController {
     func setupViews() {
         tableView.register(type: ArticleTitleTableViewCell.self)
+        tableView.register(type: ArticleAggregateTableViewCell.self)
+        tableView.register(type: ArticleSnippetTableViewCell.self)
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
     }
 }

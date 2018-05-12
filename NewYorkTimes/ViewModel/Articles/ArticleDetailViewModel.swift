@@ -15,7 +15,9 @@ struct ArticleDetailViewModel {
         self.content = content
         self.index = index
         itemViewModels = [
-            ArticleTitleTableViewCellViewModel(content: content)
+            ArticleTitleTableViewCellViewModel(content: content),
+            ArticleAggregateTableViewCellViewModel(content: content),
+            ArticleSnippetTableViewCellViewModel(content: content),
         ]
     }
     

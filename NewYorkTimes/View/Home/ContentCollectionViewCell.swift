@@ -8,12 +8,10 @@
 
 import UIKit
 
-protocol ContentCollectionViewCellProtocol {
-    var id: String { get }
+protocol ContentCollectionViewCellProtocol: ImageLoadable {
     var title: String { get }
     var date: String { get }
     var snippet: String { get }
-    func loadImage(completion: @escaping (String, Response<(UIImage)>) -> Void)
 }
 
 final class ContentCollectionViewCell: UICollectionViewCell {

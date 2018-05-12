@@ -25,12 +25,16 @@ class ContentTest: XCTestCase {
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
         let thumbnailImageURL = "https://static01.nyt.com/images/2018/05/12/arts/12perich1/12perich1-thumbStandard.jpg"
         let publishedDate = "2018-05-10T20:00:00-04:00"
+        let source = "The New York Times"
+        let byline = "By KALY SOTO"
         let mapping = Mapping(json: [
             "title": title,
             "abstract": abstract,
             "url": url,
             "thumbnail_standard": thumbnailImageURL,
             "published_date": publishedDate,
+            "source": source,
+            "byline": byline,
             "multimedia":[
                 ["url": url,
                 "type": "",
@@ -46,6 +50,8 @@ class ContentTest: XCTestCase {
         //Then:
         XCTAssertEqual(sut.title, title)
         XCTAssertEqual(sut.abstract, abstract)
+        XCTAssertEqual(sut.byline, byline)
+        XCTAssertEqual(sut.source, source)
         XCTAssertNotNil(sut.url)
         if let absoluteString = sut.url?.absoluteString {
             XCTAssertEqual(absoluteString, url)

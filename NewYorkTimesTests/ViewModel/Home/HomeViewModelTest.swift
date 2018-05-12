@@ -92,8 +92,8 @@ class HomeViewModelTest: XCTestCase {
 extension HomeViewModelTest {
     fileprivate func mockedContent() -> Content {
         return Content(title: "title", abstract: "abstract", url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html")!, thumbnailImageURL: URL(string: "https://static01.nyt.com/images/2018/05/12/arts/12perich1/12perich1-thumbStandard.jpg")!, date: Date(), multimedias: [
-            Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image)
-            ])
+            Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption")
+            ], byline: "byline", source: "source")
     }
     
     fileprivate func mockedError(message: String) -> Error {

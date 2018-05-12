@@ -21,10 +21,12 @@ class MultimediaTest: XCTestCase {
     func testMapping() {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
+        let caption = "caption"
         let json = [
             "url": url,
             "type": "image",
-            "format": "Standard Thumbnail"
+            "format": "Standard Thumbnail",
+            "caption": caption
         ]
         
         //When:
@@ -35,15 +37,18 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.url?.absoluteString, url)
         XCTAssertEqual(sut.type, .image)
         XCTAssertEqual(sut.format, .standardThumbnail)
+        XCTAssertEqual(sut.caption, caption)
     }
     
     func testMappingTypeShouldBeUnknown() {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
+        let caption = "caption"
         let json = [
             "url": url,
             "type": "something",
-            "format": "Standard Thumbnail"
+            "format": "Standard Thumbnail",
+            "caption": caption
         ]
         
         //When:
@@ -54,15 +59,18 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.url?.absoluteString, url)
         XCTAssertEqual(sut.type, .unknown)
         XCTAssertEqual(sut.format, .standardThumbnail)
+        XCTAssertEqual(sut.caption, caption)
     }
     
     func testMappingFormatShouldBeUnknown() {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
+        let caption = "caption"
         let json = [
             "url": url,
             "type": "something",
-            "format": "something"
+            "format": "something",
+            "caption": caption
         ]
         
         //When:
@@ -73,5 +81,6 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.url?.absoluteString, url)
         XCTAssertEqual(sut.type, .unknown)
         XCTAssertEqual(sut.format, .unknown)
+        XCTAssertEqual(sut.caption, caption)
     }
 }

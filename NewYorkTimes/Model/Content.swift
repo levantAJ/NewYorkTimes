@@ -15,6 +15,8 @@ struct Content {
     var thumbnailImageURL: URL?
     var date: Date?
     var multimedias: [Multimedia]?
+    var byline: String?
+    var source: String?
 }
 
 // MARK: - Mappable
@@ -27,6 +29,8 @@ extension Content: Mappable {
         thumbnailImageURL = map["thumbnail_standard"]
         date = map["published_date", .iso8601CombinedDateAndTime]
         multimedias = map["multimedia"]
+        byline = map["byline"]
+        source = map["source"]
     }
 }
 
@@ -40,5 +44,7 @@ extension Content: Equatable {
         && lhs.thumbnailImageURL == rhs.thumbnailImageURL
         && lhs.date == rhs.date
         && lhs.multimedias == rhs.multimedias
+        && lhs.byline == rhs.byline
+        && lhs.source == rhs.source
     }
 }
