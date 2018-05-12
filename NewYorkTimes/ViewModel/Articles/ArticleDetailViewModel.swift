@@ -12,7 +12,7 @@ struct ArticleDetailViewModel {
     let index: Int
     let content: Content
     let itemViewModels: [Any]
-    fileprivate let downloadImageService: DownloadImageService
+    let downloadImageService: DownloadImageService
     
     init(content: Content, index: Int) {
         self.content = content

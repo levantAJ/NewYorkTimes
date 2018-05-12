@@ -92,4 +92,40 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.caption, caption)
         XCTAssertEqual(sut.copyright, copyright)
     }
+    
+    func testEqualShouldReturnTrue() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        XCTAssertEqual(sut, multimedia)
+    }
+    
+    func testEqualShouldReturnFalseWhenCaptionNotMatch() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption1", copyright: "copyright")
+        XCTAssertNotEqual(sut, multimedia)
+    }
+    
+    func testEqualShouldReturnFalseWhenURLNotMatch() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perichd.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        XCTAssertNotEqual(sut, multimedia)
+    }
+    
+    func testEqualShouldReturnFalseWhenFormatNotMatch() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo440, type: .image, caption: "caption", copyright: "copyright")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        XCTAssertNotEqual(sut, multimedia)
+    }
+    
+    func testEqualShouldReturnFalseWhenTypeNotMatch() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .unknown, caption: "caption", copyright: "copyright")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        XCTAssertNotEqual(sut, multimedia)
+    }
+    
+    func testEqualShouldReturnFalseWhenCopyrightNotMatch() {
+        sut = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright1")
+        let multimedia = Multimedia(url: URL(string: "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"), format: .mediumThreeByTwo210, type: .image, caption: "caption", copyright: "copyright")
+        XCTAssertNotEqual(sut, multimedia)
+    }
 }

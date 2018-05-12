@@ -82,6 +82,30 @@ class RequestServiceTest: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
     }
     
+    func testObjectCannotParseData() {
+        //Given:
+        let api: API = .getContents(pageIndex: 0, pageSize: 0)
+        let expectation = XCTestExpectation(description: #function)
+        let data = Data()
+        let completion: (Response<MappableObjectBMock>) -> Void = { (response) in
+            switch response {
+            case .success(let value):
+                XCTAssertNil(value.object)
+                XCTAssertNil(value.array)
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        }
+        
+        //When:
+        sut.object(from: api, completion: completion)
+        session.completion?(data, nil, nil)
+        
+        //Then:
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
     func testObjectFailureWithError() {
         //Given:
         let api: API = .getContents(pageIndex: 0, pageSize: 0)
@@ -168,6 +192,33 @@ class RequestServiceTest: XCTestCase {
         sut.array(from: api, completion: completion)
         session.completion?(data, nil, nil)
 
+        //Then:
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testArrayCannotParseData() {
+        //Given:
+        let api: API = .getContents(pageIndex: 0, pageSize: 0)
+        let expectation = XCTestExpectation(description: #function)
+        let data = Data()
+        let completion: (Response<[MappableObjectBMock]>) -> Void = { (response) in
+            switch response {
+            case .success(let value):
+                XCTAssertEqual(value.count, 1)
+                if (value.count == 1) {
+                    XCTAssertNil(value[0].object)
+                    XCTAssertNil(value[0].array)
+                }
+            case .failure(let error):
+                XCTAssertNotNil(error)
+            }
+            expectation.fulfill()
+        }
+        
+        //When:
+        sut.array(from: api, completion: completion)
+        session.completion?(data, nil, nil)
+        
         //Then:
         wait(for: [expectation], timeout: 0.1)
     }
