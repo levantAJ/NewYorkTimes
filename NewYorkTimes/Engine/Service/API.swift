@@ -50,7 +50,7 @@ extension API {
     fileprivate var queryItems: [URLQueryItem] {
         switch self {
         case .getContents(let pageIndex, let pageSize):
-            return [URLQueryItem(name: "limit", value: "\(pageSize)"), URLQueryItem(name: "offset", value: "\(pageIndex)")]
+            return [URLQueryItem(name: "limit", value: "\(pageSize)"), URLQueryItem(name: "offset", value: "\(pageIndex * pageSize)")]
         case .searchArticles(let query, let pageIndex):
             return [URLQueryItem(name: "q", value: query), URLQueryItem(name: "page", value: "\(pageIndex)")]
         }

@@ -17,6 +17,7 @@
 		33457EFF20A5FE7F00F3647A /* MultimediaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33457EFE20A5FE7F00F3647A /* MultimediaTest.swift */; };
 		33B5832620A5EAA300C5196B /* ContentTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B5832520A5EAA300C5196B /* ContentTest.swift */; };
 		33B5832820A5F86000C5196B /* Multimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B5832720A5F86000C5196B /* Multimedia.swift */; };
+		33D57A6D20A6E41800553902 /* HomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D57A6C20A6E41800553902 /* HomeViewControllerTest.swift */; };
 		33EBB37520A69BA0004DCC56 /* HomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBB37420A69BA0004DCC56 /* HomeViewModelTest.swift */; };
 		33EBB37720A69BF6004DCC56 /* ContentServiceApiMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBB37620A69BF6004DCC56 /* ContentServiceApiMock.swift */; };
 		33EBB37A20A6A22E004DCC56 /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBB37820A6A22E004DCC56 /* ContentCollectionViewCell.swift */; };
@@ -79,6 +80,7 @@
 		33457EFE20A5FE7F00F3647A /* MultimediaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaTest.swift; sourceTree = "<group>"; };
 		33B5832520A5EAA300C5196B /* ContentTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTest.swift; sourceTree = "<group>"; };
 		33B5832720A5F86000C5196B /* Multimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multimedia.swift; sourceTree = "<group>"; };
+		33D57A6C20A6E41800553902 /* HomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTest.swift; sourceTree = "<group>"; };
 		33EBB37420A69BA0004DCC56 /* HomeViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelTest.swift; sourceTree = "<group>"; };
 		33EBB37620A69BF6004DCC56 /* ContentServiceApiMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentServiceApiMock.swift; sourceTree = "<group>"; };
 		33EBB37820A6A22E004DCC56 /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -174,6 +176,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		33D57A6B20A6E3FC00553902 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				33D57A6C20A6E41800553902 /* HomeViewControllerTest.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		33EBB37220A69B7F004DCC56 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +268,7 @@
 		33F6714420A5BE2D000C7BB5 /* NewYorkTimesUITests */ = {
 			isa = PBXGroup;
 			children = (
+				33D57A6B20A6E3FC00553902 /* Home */,
 				33F6714720A5BE2D000C7BB5 /* Info.plist */,
 			);
 			path = NewYorkTimesUITests;
@@ -474,6 +485,7 @@
 					};
 					33F6714020A5BE2D000C7BB5 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 						TestTargetID = 33F6712120A5BE2C000C7BB5;
 					};
 				};
@@ -583,6 +595,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D57A6D20A6E41800553902 /* HomeViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +759,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.levantAJ.NewYorkTimes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -763,6 +777,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.levantAJ.NewYorkTimes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -783,7 +798,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levantAJ.NewYorkTimesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -806,7 +823,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levantAJ.NewYorkTimesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -820,6 +839,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NewYorkTimesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -829,6 +849,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.levantAJ.NewYorkTimesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = NewYorkTimes;
@@ -839,6 +860,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NewYorkTimesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

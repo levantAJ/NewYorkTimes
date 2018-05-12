@@ -11,12 +11,13 @@ import Foundation
 final class HomeViewModel {
     var onError: ((String) -> Void)?
     var onReloadData: (() -> Void)?
-    var onMoreData: (() -> Void)?
+    var onMoreData: (([ContentCollectionViewCellViewModel]) -> Void)?
     
     fileprivate let contentSerivce: ContentServiceApiProtocol
     fileprivate var currentPageIndex: UInt
     fileprivate var downloadImageService: DownloadImageServiceProtocol
     fileprivate var contents: [ContentCollectionViewCellViewModel]
+    fileprivate var isLoading: Bool = false
     
     init(contentSerivce: ContentServiceApiProtocol) {
         self.contentSerivce = contentSerivce
@@ -34,6 +35,10 @@ final class HomeViewModel {
             return contents[index]
         }
         return nil
+    }
+    
+    func append(content: ContentCollectionViewCellViewModel) {
+        contents.append(content)
     }
 }
 
@@ -53,19 +58,23 @@ extension HomeViewModel: Pageable {
 
 extension HomeViewModel {
     fileprivate func request(pageIndex: UInt) {
-        self.currentPageIndex = pageIndex
-        self.contentSerivce.request(pageIndex: 0, pageSize: Constant.API.PageSize) { [weak self] response in
+        guard !isLoading else { return } //Avoid making multiple requests a the same time.
+        isLoading = true
+        currentPageIndex = pageIndex
+        contentSerivce.request(pageIndex: currentPageIndex, pageSize: Constant.API.PageSize) { [weak self] response in
             guard let strongSelf = self else { return }
+            strongSelf.isLoading = false
             switch response {
             case .success(let contents):
+                let cellViewModels = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
                 if (strongSelf.currentPageIndex == Constant.API.DefaultPageIndex) {
-                    strongSelf.contents = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
+                    strongSelf.contents = cellViewModels
                     DispatchQueue.main.async {
                         strongSelf.onReloadData?()
                     }
-                } else {
+                } else if !cellViewModels.isEmpty {
                     DispatchQueue.main.async {
-                        strongSelf.onMoreData?()
+                        strongSelf.onMoreData?(cellViewModels)
                     }
                 }
             case .failure(let error):

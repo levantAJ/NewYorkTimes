@@ -18,7 +18,7 @@ class APITest: XCTestCase {
         XCTAssertEqual(sut.url.absoluteString, "https://api.nytimes.com/svc/news/v3/content/all/all.json?limit=10&offset=0&api-key=180e7895aa4045f5bdf78389e0cd3ec2")
         
         sut = .getContents(pageIndex: 1, pageSize: 10)
-        XCTAssertEqual(sut.url.absoluteString, "https://api.nytimes.com/svc/news/v3/content/all/all.json?limit=10&offset=1&api-key=180e7895aa4045f5bdf78389e0cd3ec2")
+        XCTAssertEqual(sut.url.absoluteString, "https://api.nytimes.com/svc/news/v3/content/all/all.json?limit=10&offset=10&api-key=180e7895aa4045f5bdf78389e0cd3ec2")
     }
     
     func testMethodForGetArticlesAPI() {
