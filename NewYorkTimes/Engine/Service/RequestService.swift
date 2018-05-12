@@ -17,9 +17,11 @@ protocol URLSessionProtocol {
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
+extension URLSession: URLSessionProtocol {}
+
 protocol RequestServiceProtocol {
     func object<T: Mappable>(from api: API, completion: @escaping (Response<T>) -> Void)
-    func array<T: Mappable>(from api: API, completion: @escaping (Response<[T]?>) -> Void)
+    func array<T: Mappable>(from api: API, completion: @escaping (Response<[T]>) -> Void)
 }
 
 struct RequestService {
@@ -46,7 +48,7 @@ extension RequestService: RequestServiceProtocol {
         }
     }
     
-    func array<T: Mappable>(from api: API, completion: @escaping (Response<[T]?>) -> Void) {
+    func array<T: Mappable>(from api: API, completion: @escaping (Response<[T]>) -> Void) {
         request(api: api) { (response) in
             switch response {
             case .success(let json):
@@ -83,13 +85,5 @@ extension RequestService {
             }
         }
         dataTask.resume()
-    }
-}
-
-extension Constant {
-    struct BaseServiceApi {
-        static let NewYorkTimesKey = "180e7895aa4045f5bdf78389e0cd3ec2"
-        static let Scheme = "https"
-        static let Host = "api.nytimes.com"
     }
 }

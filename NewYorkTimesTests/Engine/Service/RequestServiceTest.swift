@@ -117,17 +117,17 @@ class RequestServiceTest: XCTestCase {
                 ["string": "string4"],
             ]]]
         let data = try! JSONSerialization.data(withJSONObject: json)
-        let completion: (Response<[MappableObjectBMock]?>) -> Void = { (response) in
+        let completion: (Response<[MappableObjectBMock]>) -> Void = { (response) in
             switch response {
             case .success(let value):
-                XCTAssertEqual(value?.count, 1)
-                if (value?.count == 1) {
-                    XCTAssertEqual(value?[0].object?.string, "string1")
-                    XCTAssertEqual(value?[0].array?.count, 3)
-                    if (value?[0].array?.count == 3) {
-                        XCTAssertEqual(value?[0].array?[0].string, "string2")
-                        XCTAssertEqual(value?[0].array?[1].string, "string3")
-                        XCTAssertEqual(value?[0].array?[2].string, "string4")
+                XCTAssertEqual(value.count, 1)
+                if (value.count == 1) {
+                    XCTAssertEqual(value[0].object?.string, "string1")
+                    XCTAssertEqual(value[0].array?.count, 3)
+                    if (value[0].array?.count == 3) {
+                        XCTAssertEqual(value[0].array?[0].string, "string2")
+                        XCTAssertEqual(value[0].array?[1].string, "string3")
+                        XCTAssertEqual(value[0].array?[2].string, "string4")
                     }
                 }
             case .failure(let error):
@@ -150,13 +150,13 @@ class RequestServiceTest: XCTestCase {
         let expectation = XCTestExpectation(description: #function)
         let json = [[:]]
         let data = try! JSONSerialization.data(withJSONObject: json)
-        let completion: (Response<[MappableObjectBMock]?>) -> Void = { (response) in
+        let completion: (Response<[MappableObjectBMock]>) -> Void = { (response) in
             switch response {
             case .success(let value):
-                XCTAssertEqual(value?.count, 1)
-                if (value?.count == 1) {
-                    XCTAssertNil(value?[0].object)
-                    XCTAssertNil(value?[0].array)
+                XCTAssertEqual(value.count, 1)
+                if (value.count == 1) {
+                    XCTAssertNil(value[0].object)
+                    XCTAssertNil(value[0].array)
                 }
             case .failure(let error):
                 XCTAssertNotNil(error)
@@ -177,7 +177,7 @@ class RequestServiceTest: XCTestCase {
         let api: API = .getContents(pageIndex: 0, pageSize: 0)
         let expectation = XCTestExpectation(description: #function)
         let expectedError = NSError(domain: "test-error", code: 0, userInfo: [:])
-        let completion: (Response<[MappableObjectBMock]?>) -> Void = { (response) in
+        let completion: (Response<[MappableObjectBMock]>) -> Void = { (response) in
             switch response {
             case .success(let value):
                 XCTAssertNil(value)

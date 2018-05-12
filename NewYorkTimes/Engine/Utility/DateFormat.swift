@@ -9,6 +9,7 @@
 import UIKit
 
 enum DateFormat {
+    case date
     case iso8601Date
     case iso8601CombinedDateAndTime
     case custom(format: String)
@@ -19,6 +20,8 @@ enum DateFormat {
             return "yyyy-MM-dd"
         case .iso8601CombinedDateAndTime:
             return "yyyy-MM-dd'T'HH:mm:ssZZZZ"
+        case .date:
+            return "dd/MM/yyyy"
         case .custom(let format):
             return format
         }

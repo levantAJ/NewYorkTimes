@@ -27,10 +27,10 @@ enum API {
     
     var url: URL {
         var component = URLComponents()
-        component.scheme = Constant.BaseServiceApi.Scheme
-        component.host = Constant.BaseServiceApi.Host
+        component.scheme = Constant.API.Scheme
+        component.host = Constant.API.Host
         component.path = path
-        component.queryItems = queryItems + [URLQueryItem(name: "api-key", value: Constant.BaseServiceApi.NewYorkTimesKey)]
+        component.queryItems = queryItems + [URLQueryItem(name: "api-key", value: Constant.API.NewYorkTimesKey)]
         return component.url! //Force unwrapping to make sure URL never nil
     }
 }
@@ -54,5 +54,15 @@ extension API {
         case .searchArticles(let query, let pageIndex):
             return [URLQueryItem(name: "q", value: query), URLQueryItem(name: "page", value: "\(pageIndex)")]
         }
+    }
+}
+
+extension Constant {
+    struct API {
+        static let DefaultPageIndex: UInt = 0
+        static let PageSize: UInt = 10
+        static let NewYorkTimesKey = "180e7895aa4045f5bdf78389e0cd3ec2"
+        static let Scheme = "https"
+        static let Host = "api.nytimes.com"
     }
 }

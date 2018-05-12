@@ -9,7 +9,7 @@
 import Foundation
 @testable import NewYorkTimes
 
-class URLSessionDataTaskMock: URLSessionDataTask {
+final class URLSessionDataTaskMock: URLSessionDataTask {
     override func resume() {
         //Overriding method
     }

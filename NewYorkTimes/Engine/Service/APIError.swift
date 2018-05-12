@@ -11,6 +11,7 @@ import Foundation
 enum APIError: Int {
     case unexpected = -1
     case mapping = -2
+    case serverError = -3
     
     var code: Int {
         return rawValue
@@ -22,6 +23,8 @@ enum APIError: Int {
             return NSLocalizedString("Unexpected error", comment: "")
         case .mapping:
             return NSLocalizedString("Cannot mapping object", comment: "")
+        case .serverError:
+            return NSLocalizedString("Cannot connect to server", comment: "")
         }
     }
     

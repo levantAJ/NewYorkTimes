@@ -8,7 +8,7 @@
 
 @testable import NewYorkTimes
 
-class RequestServiceMock<TMock: Mappable>: RequestServiceProtocol {
+final class RequestServiceMock<TMock: Mappable>: RequestServiceProtocol {
     var objectCompletion: ((Response<TMock>) -> Void)?
     var arrayCompletion: ((Response<[TMock]?>) -> Void)?
     
@@ -23,11 +23,11 @@ class RequestServiceMock<TMock: Mappable>: RequestServiceProtocol {
         }
     }
     
-    func array<T>(from api: API, completion: @escaping (Response<[T]?>) -> Void) {
+    func array<T>(from api: API, completion: @escaping (Response<[T]>) -> Void) {
         arrayCompletion = { response in
             switch response {
             case .success(let value):
-                completion(.success(value as? [T]))
+                completion(.success(value as! [T]))
             case .failure(let error):
                 completion(.failure(error))
             }

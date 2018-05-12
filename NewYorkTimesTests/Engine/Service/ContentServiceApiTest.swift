@@ -29,8 +29,8 @@ class ContentServiceApiTest: XCTestCase {
         sut.request(pageIndex: 0, pageSize: 0) { response in
             switch response {
             case .success(let value):
-                XCTAssertEqual(value?.count, 1)
-                if let content = value?.first {
+                XCTAssertEqual(value.count, 1)
+                if let content = value.first {
                     XCTAssertEqual(expectedContent, content)
                 }
             case .failure(let error):
