@@ -23,7 +23,7 @@ struct ArticleDetailViewModel {
             ArticleAggregateTableViewCellViewModel(content: content),
             ArticleSnippetTableViewCellViewModel(content: content),
             ]
-        for multimedia in content.multimedias ?? [] {
+        if let multimedia = content.multimedias?.last {
             viewModels.append(ArticleImageTableViewCellViewModel(multimedia: multimedia, downloadImageService: self.downloadImageService))
         }
         itemViewModels = viewModels

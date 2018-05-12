@@ -26,6 +26,7 @@ struct Multimedia {
     var format: MultimediaFormat = .unknown
     var type: MultimediaType = .unknown
     var caption: String?
+    var copyright: String?
 }
 
 // MARK: - Mappable
@@ -36,6 +37,7 @@ extension Multimedia: Mappable {
         format = map["format"] ?? .unknown
         type = map["type"] ?? .unknown
         caption = map["caption"]
+        copyright = map["copyright"]
     }
 }
 
@@ -47,5 +49,6 @@ extension Multimedia: Equatable {
             && lhs.url == rhs.url
             && lhs.type == rhs.type
             && lhs.caption == rhs.caption
+            && lhs.copyright == rhs.copyright
     }
 }

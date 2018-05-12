@@ -22,11 +22,13 @@ class MultimediaTest: XCTestCase {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
         let caption = "caption"
+        let copyright = "copyright"
         let json = [
             "url": url,
             "type": "image",
             "format": "Standard Thumbnail",
-            "caption": caption
+            "caption": caption,
+            "copyright": copyright,
         ]
         
         //When:
@@ -38,17 +40,20 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.type, .image)
         XCTAssertEqual(sut.format, .standardThumbnail)
         XCTAssertEqual(sut.caption, caption)
+        XCTAssertEqual(sut.copyright, copyright)
     }
     
     func testMappingTypeShouldBeUnknown() {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
         let caption = "caption"
+        let copyright = "copyright"
         let json = [
             "url": url,
             "type": "something",
             "format": "Standard Thumbnail",
-            "caption": caption
+            "caption": caption,
+            "copyright": copyright,
         ]
         
         //When:
@@ -60,17 +65,20 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.type, .unknown)
         XCTAssertEqual(sut.format, .standardThumbnail)
         XCTAssertEqual(sut.caption, caption)
+        XCTAssertEqual(sut.copyright, copyright)
     }
     
     func testMappingFormatShouldBeUnknown() {
         //Given:
         let url = "https://www.nytimes.com/2018/05/11/arts/music/12perich.html"
         let caption = "caption"
+        let copyright = "copyright"
         let json = [
             "url": url,
             "type": "something",
             "format": "something",
-            "caption": caption
+            "caption": caption,
+            "copyright": copyright,
         ]
         
         //When:
@@ -82,5 +90,6 @@ class MultimediaTest: XCTestCase {
         XCTAssertEqual(sut.type, .unknown)
         XCTAssertEqual(sut.format, .unknown)
         XCTAssertEqual(sut.caption, caption)
+        XCTAssertEqual(sut.copyright, copyright)
     }
 }

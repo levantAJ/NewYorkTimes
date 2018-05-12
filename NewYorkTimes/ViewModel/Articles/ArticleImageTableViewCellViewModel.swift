@@ -22,7 +22,16 @@ final class ArticleImageTableViewCellViewModel {
 
 extension ArticleImageTableViewCellViewModel: ArticleImageTableViewCellProtocol {
     var caption: String {
-        return multimedia.caption ?? ""
+        var components: [String] = []
+        if let caption = multimedia.caption,
+            !caption.isEmpty {
+            components.append(caption)
+        }
+        if let copyright = multimedia.copyright,
+            !copyright.isEmpty {
+            components.append(copyright)
+        }
+        return components.joined(separator: " | ")
     }
     
     var id: String {
