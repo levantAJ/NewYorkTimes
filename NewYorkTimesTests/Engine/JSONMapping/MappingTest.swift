@@ -9,22 +9,16 @@
 import XCTest
 @testable import NewYorkTimes
 
-struct MappableObjectA: Mappable {
-    var string: String?
-    
-    mutating func mapping(map: Mapping) {
-        string = map["string"]
-    }
+enum EnumInt: Int {
+    case case0
+    case case1
+    case case2
 }
 
-struct MappableObjectB: Mappable {
-    var object: MappableObjectA?
-    var array: [MappableObjectA]?
-    
-    mutating func mapping(map: Mapping) {
-        object = map["object"]
-        array = map["array"]
-    }
+enum EnumString: String {
+    case case0 = "case0"
+    case case1 = "case1"
+    case case2 = "case2"
 }
 
 class MappingTest: XCTestCase {
@@ -88,12 +82,12 @@ class MappingTest: XCTestCase {
                 ["string": string2],
                 ["string": string3],
                 ["string": string4],
-            ]
-            ]
-            ])
+            ]]])
         
         //When:
-        let actualObjectB: MappableObjectB? = sut["value"]
+        let actualObjectB: MappableObjectBMock? = sut["value"]
+        
+        //Then:
         XCTAssertNotNil(actualObjectB)
         guard let objectB = actualObjectB else { return }
         XCTAssertNotNil(objectB.object)
@@ -107,5 +101,71 @@ class MappingTest: XCTestCase {
             XCTAssertEqual(array[1].string, string3)
             XCTAssertEqual(array[2].string, string4)
         }
+    }
+    
+    func testMappingEnumIntCase0() {
+        //Given:
+        sut = Mapping(json: ["enum": 0])
+        
+        //When
+        let enumInt: EnumInt? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case0)
+    }
+    
+    func testMappingEnumIntCase1() {
+        //Given:
+        sut = Mapping(json: ["enum": 1])
+        
+        //When
+        let enumInt: EnumInt? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case1)
+    }
+    
+    func testMappingEnumIntCase2() {
+        //Given:
+        sut = Mapping(json: ["enum": 2])
+        
+        //When
+        let enumInt: EnumInt? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case2)
+    }
+    
+    func testMappingEnumStringCase0() {
+        //Given:
+        sut = Mapping(json: ["enum": "case0"])
+        
+        //When
+        let enumInt: EnumString? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case0)
+    }
+    
+    func testMappingEnumStringCase1() {
+        //Given:
+        sut = Mapping(json: ["enum": "case1"])
+        
+        //When
+        let enumInt: EnumString? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case1)
+    }
+    
+    func testMappingEnumStringCase2() {
+        //Given:
+        sut = Mapping(json: ["enum": "case2"])
+        
+        //When
+        let enumInt: EnumString? = sut["enum"]
+        
+        //Then:
+        XCTAssertEqual(enumInt, .case2)
     }
 }

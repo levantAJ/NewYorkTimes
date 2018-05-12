@@ -45,4 +45,10 @@ struct Mapping {
         guard let value = json[key] else { return nil }
         return Mapper<T>().map(json: value)
     }
+    
+    //Convert object to an enum
+    subscript<T: RawRepresentable>(key: String) -> T? {
+        guard let rawValue = json[key] as? T.RawValue else { return nil }
+        return T(rawValue: rawValue)
+    }
 }

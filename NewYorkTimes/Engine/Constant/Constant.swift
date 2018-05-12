@@ -7,8 +7,3 @@
 //
 
 public struct Constant {}
-
-public enum Response<Value> {
-    case success(Value)
-    case failure(Error)
-}

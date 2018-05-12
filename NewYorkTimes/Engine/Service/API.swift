@@ -1,8 +1,8 @@
 //
-//  BaseServiceApi.swift
+//  API.swift
 //  NewYorkTimes
 //
-//  Created by levantAJ on 11/5/18.
+//  Created by levantAJ on 12/5/18.
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
@@ -33,8 +33,12 @@ enum API {
         component.queryItems = queryItems + [URLQueryItem(name: "api-key", value: Constant.BaseServiceApi.NewYorkTimesKey)]
         return component.url! //Force unwrapping to make sure URL never nil
     }
-    
-    private var path: String {
+}
+
+// MARK: - Privates
+
+extension API {
+    fileprivate var path: String {
         switch self {
         case .getContents:
             return "/svc/news/v3/content/all/all.json"
@@ -43,20 +47,12 @@ enum API {
         }
     }
     
-    private var queryItems: [URLQueryItem] {
+    fileprivate var queryItems: [URLQueryItem] {
         switch self {
         case .getContents(let pageIndex, let pageSize):
             return [URLQueryItem(name: "limit", value: "\(pageSize)"), URLQueryItem(name: "offset", value: "\(pageIndex)")]
         case .searchArticles(let query, let pageIndex):
             return [URLQueryItem(name: "q", value: query), URLQueryItem(name: "page", value: "\(pageIndex)")]
         }
-    }
-}
-
-extension Constant {
-    struct BaseServiceApi {
-        static let NewYorkTimesKey = "180e7895aa4045f5bdf78389e0cd3ec2"
-        static let Scheme = "https"
-        static let Host = "api.nytimes.com"
     }
 }
