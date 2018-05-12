@@ -31,6 +31,18 @@ class ArticlesViewModelTest: XCTestCase {
         }
     }
     
+    func testInitWithContentsIsEmpty() {
+        //Given:
+        contents = []
+        
+        //When:
+        sut = ArticlesViewModel(contents: contents, currentIndex: 0)
+        
+        //Then
+        XCTAssertEqual(sut.currentIndex, 0)
+        XCTAssertTrue(sut.detailViewModels.isEmpty)
+    }
+    
     func testDetailViewModelIsNilWhenIndexIsLessThanZero() {
         //When:
         let viewModel = sut.detailViewModel(at: -1)

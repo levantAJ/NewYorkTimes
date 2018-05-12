@@ -232,8 +232,6 @@ class ArticleImageTableViewCellViewModelTest: XCTestCase {
         //Then:
         wait(for: [expectation], timeout: 0.1)
     }
-
-
 }
 
 // MARK: - Privates

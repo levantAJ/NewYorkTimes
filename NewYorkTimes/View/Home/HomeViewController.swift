@@ -24,7 +24,7 @@ final class HomeViewController: UIViewController {
         if segue.identifier == Constant.HomeViewController.ToArticlesIdentifier {
             let articlesVC = segue.destination as! ArticlesViewController
             let index = sender as! Int
-            let contents = viewModel.contents.map { $0.content }
+            let contents = viewModel.contentViewModels.map { $0.content }
             articlesVC.viewModel = ArticlesViewModel(contents: contents, currentIndex: index)
         }
     }
@@ -34,12 +34,12 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfRows
+        return viewModel.contentViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: ContentCollectionViewCell.self, for: indexPath)
-        if let content = viewModel.content(at: indexPath.item) {
+        if let content = viewModel.contentViewModel(at: indexPath.item) {
             cell.set(viewModel: content)
         }
         return cell
@@ -97,8 +97,8 @@ extension HomeViewController {
             guard let strongSelf = self else { return }
             strongSelf.collectionView.performBatchUpdates({
                 for content in contents {
-                    strongSelf.viewModel.append(content: content)
-                    let indexPath = IndexPath(item: strongSelf.viewModel.numberOfRows - 1, section: 0)
+                    strongSelf.viewModel.append(contentViewModel: content)
+                    let indexPath = IndexPath(item: strongSelf.viewModel.contentViewModels.count - 1, section: 0)
                     strongSelf.collectionView.insertItems(at: [indexPath])
                 }
             })

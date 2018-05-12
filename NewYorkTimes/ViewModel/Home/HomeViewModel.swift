@@ -13,32 +13,29 @@ final class HomeViewModel {
     var onReloadData: (() -> Void)?
     var onMoreData: (([ContentCollectionViewCellViewModel]) -> Void)?
     
-    fileprivate(set) var contents: [ContentCollectionViewCellViewModel]
+    fileprivate(set) var contentViewModels: [ContentCollectionViewCellViewModel]
+    fileprivate(set) var isLoading: Bool
     fileprivate let contentSerivce: ContentServiceApiProtocol
     fileprivate var currentPageIndex: UInt
     fileprivate var downloadImageService: DownloadImageServiceProtocol
-    fileprivate var isLoading: Bool = false
     
     init(contentSerivce: ContentServiceApiProtocol) {
         self.contentSerivce = contentSerivce
         self.currentPageIndex = 0
-        self.contents = []
+        self.contentViewModels = []
         self.downloadImageService = DownloadImageService(session: URLSession.shared)
+        self.isLoading = false
     }
     
-    var numberOfRows: Int {
-        return contents.count
-    }
-    
-    func content(at index: Int) -> ContentCollectionViewCellViewModel? {
-        if index < contents.count {
-            return contents[index]
+    func contentViewModel(at index: Int) -> ContentCollectionViewCellViewModel? {
+        if index < contentViewModels.count && index >= 0 {
+            return contentViewModels[index]
         }
         return nil
     }
     
-    func append(content: ContentCollectionViewCellViewModel) {
-        contents.append(content)
+    func append(contentViewModel: ContentCollectionViewCellViewModel) {
+        contentViewModels.append(contentViewModel)
     }
 }
 
@@ -66,15 +63,15 @@ extension HomeViewModel {
             strongSelf.isLoading = false
             switch response {
             case .success(let contents):
-                let cellViewModels = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
+                let contentViewModels = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
                 if (strongSelf.currentPageIndex == Constant.API.DefaultPageIndex) {
-                    strongSelf.contents = cellViewModels
+                    strongSelf.contentViewModels = contentViewModels
                     DispatchQueue.main.async {
                         strongSelf.onReloadData?()
                     }
-                } else if !cellViewModels.isEmpty {
+                } else if !contentViewModels.isEmpty {
                     DispatchQueue.main.async {
-                        strongSelf.onMoreData?(cellViewModels)
+                        strongSelf.onMoreData?(contentViewModels)
                     }
                 }
             case .failure(let error):

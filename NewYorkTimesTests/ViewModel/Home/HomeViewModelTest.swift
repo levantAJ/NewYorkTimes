@@ -13,10 +13,13 @@ class HomeViewModelTest: XCTestCase {
     
     var sut: HomeViewModel!
     var contentSerivce: ContentServiceApiMock!
+    var content: Content!
+    var downloadImageService: DownloadImageServiceMock!
     
     override func setUp() {
         super.setUp()
         contentSerivce = ContentServiceApiMock()
+        downloadImageService = DownloadImageServiceMock()
         sut = HomeViewModel(contentSerivce: contentSerivce)
     }
     
@@ -24,10 +27,10 @@ class HomeViewModelTest: XCTestCase {
         //Given:
         let content = mockedContent()
         let contents =  [content, content, content]
-        let succeedExpectation = XCTestExpectation(description: #function + "onReloadData")
+        let reloadDataExpectation = XCTestExpectation(description: #function + "onReloadData")
         sut.onReloadData = { [weak self] in
-            XCTAssertEqual(self?.sut.numberOfRows, contents.count)
-            succeedExpectation.fulfill()
+            XCTAssertEqual(self?.sut.contentViewModels.count, contents.count)
+            reloadDataExpectation.fulfill()
         }
         
         let erroredExpectation = XCTestExpectation(description: #function + "onError")
@@ -36,55 +39,163 @@ class HomeViewModelTest: XCTestCase {
             erroredExpectation.fulfill()
         }
         
+        let moreDataExpectation = XCTestExpectation(description: #function + "onMoreData")
+        moreDataExpectation.isInverted = true
+        sut.onMoreData = { _ in
+            moreDataExpectation.fulfill()
+        }
+        
         //When:
         sut.refresh()
+        XCTAssertTrue(sut.isLoading)
         contentSerivce.completion?(.success(contents))
         
         //Then:
+        XCTAssertFalse(sut.isLoading)
         XCTAssertEqual(contentSerivce.pageIndex, 0)
         XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
-        wait(for: [succeedExpectation, erroredExpectation], timeout: 0.1)
+        wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
     }
     
     func testRefreshError() {
         //Given:
         let message = "Error message"
         let expectedError = mockedError(message: message)
-        let succeedExpectation = XCTestExpectation(description: #function + "onReloadData")
-        succeedExpectation.isInverted = true
+        let reloadDataExpectation = XCTestExpectation(description: #function + "onReloadData")
+        reloadDataExpectation.isInverted = true
         sut.onReloadData = {
-            succeedExpectation.fulfill()
+            reloadDataExpectation.fulfill()
         }
         
         let erroredExpectation = XCTestExpectation(description: #function + "onError")
         sut.onError = { [weak self] errorMessage in
-            XCTAssertEqual(self?.sut.numberOfRows, 0)
+            XCTAssertEqual(self?.sut.contentViewModels.count, 0)
             XCTAssertEqual(errorMessage, message)
             erroredExpectation.fulfill()
         }
         
+        let moreDataExpectation = XCTestExpectation(description: #function + "onMoreData")
+        moreDataExpectation.isInverted = true
+        sut.onMoreData = { _ in
+            moreDataExpectation.fulfill()
+        }
+        
         //When:
         sut.refresh()
+        XCTAssertTrue(sut.isLoading)
         contentSerivce.completion?(.failure(expectedError))
         
         //Then:
+        XCTAssertFalse(sut.isLoading)
         XCTAssertEqual(contentSerivce.pageIndex, 0)
         XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
-        wait(for: [succeedExpectation, erroredExpectation], timeout: 0.1)
+        wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
     }
     
     func testLoadMoreSuccess() {
-        //TODO:
+        //Given:
+        let content = mockedContent()
+        let contents =  [content, content, content]
+        let reloadDataExpectation = XCTestExpectation(description: #function + "onReloadData")
+        reloadDataExpectation.isInverted = true
+        sut.onReloadData = { [weak self] in
+            XCTAssertEqual(self?.sut.contentViewModels.count, contents.count)
+            reloadDataExpectation.fulfill()
+        }
+        
+        let erroredExpectation = XCTestExpectation(description: #function + "onError")
+        erroredExpectation.isInverted = true
+        sut.onError = { _ in
+            erroredExpectation.fulfill()
+        }
+        
+        let moreDataExpectation = XCTestExpectation(description: #function + "onMoreData")
+        sut.onMoreData = { _ in
+            moreDataExpectation.fulfill()
+        }
+        
+        //When:
+        sut.loadMore()
+        XCTAssertTrue(sut.isLoading)
+        contentSerivce.completion?(.success(contents))
+        
+        //Then:
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertEqual(contentSerivce.pageIndex, 1)
+        XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
+        wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
     }
     
-    func testNumberOfRows() {
-        XCTAssertEqual(sut.numberOfRows, 0)
+    func testLoadMoreError() {
+        //Given:
+        let message = "Error message"
+        let expectedError = mockedError(message: message)
+        let reloadDataExpectation = XCTestExpectation(description: #function + "onReloadData")
+        reloadDataExpectation.isInverted = true
+        sut.onReloadData = {
+            reloadDataExpectation.fulfill()
+        }
+        
+        let erroredExpectation = XCTestExpectation(description: #function + "onError")
+        sut.onError = { [weak self] errorMessage in
+            XCTAssertEqual(self?.sut.contentViewModels.count, 0)
+            XCTAssertEqual(errorMessage, message)
+            erroredExpectation.fulfill()
+        }
+        
+        let moreDataExpectation = XCTestExpectation(description: #function + "onMoreData")
+        moreDataExpectation.isInverted = true
+        sut.onMoreData = { _ in
+            moreDataExpectation.fulfill()
+        }
+        
+        //When:
+        sut.loadMore()
+        XCTAssertTrue(sut.isLoading)
+        contentSerivce.completion?(.failure(expectedError))
+        
+        //Then:
+        XCTAssertFalse(sut.isLoading)
+        XCTAssertEqual(contentSerivce.pageIndex, 1)
+        XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
+        wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
     }
     
-    func testContentAtIndex() {
-        XCTAssertNil(sut.content(at: 0))
+    func testContentViewModel() {
+        XCTAssertNil(sut.contentViewModel(at: 0))
+        
+        //Given:
+        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
+        sut.append(contentViewModel: viewModel)
+        sut.append(contentViewModel: viewModel)
+        sut.append(contentViewModel: viewModel)
+        
+        //When:
+        let viewModel0 = sut.contentViewModel(at: -1)
+        let viewModel1 = sut.contentViewModel(at: 0)
+        let viewModel2 = sut.contentViewModel(at: 1)
+        let viewModel3 = sut.contentViewModel(at: 2)
+        let viewModel4 = sut.contentViewModel(at: 3)
+        
+        //Then:
+        XCTAssertNil(viewModel0)
+        XCTAssertNotNil(viewModel1)
+        XCTAssertNotNil(viewModel2)
+        XCTAssertNotNil(viewModel3)
+        XCTAssertNil(viewModel4)
     }
     
+    func testAppendContentViewModel() {
+        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 1)
+        
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 2)
+        
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 3)
+    }
 }
 
 // MARK: - Privates
