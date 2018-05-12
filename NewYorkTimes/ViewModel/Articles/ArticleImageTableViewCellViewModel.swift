@@ -1,5 +1,5 @@
 //
-//  ContentCollectionViewCellViewModel.swift
+//  ArticleImageTableViewCellViewModel.swift
 //  NewYorkTimes
 //
 //  Created by levantAJ on 12/5/18.
@@ -7,40 +7,30 @@
 //
 
 import UIKit
-import Foundation
 
-final class ContentCollectionViewCellViewModel {
-    let content: Content
+final class ArticleImageTableViewCellViewModel {
+    let multimedia: Multimedia
     fileprivate let downloadImageService: DownloadImageServiceProtocol
     
-    init(content: Content, downloadImageService: DownloadImageServiceProtocol) {
-        self.content = content
+    init(multimedia: Multimedia, downloadImageService: DownloadImageServiceProtocol) {
+        self.multimedia = multimedia
         self.downloadImageService = downloadImageService
     }
 }
 
-// MARK: - ContentCollectionViewCellProtocol
+// MARK: - ArticleImageTableViewCellProtocol
 
-extension ContentCollectionViewCellViewModel: ContentCollectionViewCellProtocol {
+extension ArticleImageTableViewCellViewModel: ArticleImageTableViewCellProtocol {
+    var caption: String {
+        return multimedia.caption ?? ""
+    }
+    
     var id: String {
-        return content.url?.absoluteString ?? ""
-    }
-    
-    var title: String {
-        return content.title ?? ""
-    }
-    
-    var date: String {
-        return content.date?.dateString ?? ""
-    }
-    
-    var snippet: String {
-        return content.abstract ?? ""
+        return multimedia.url?.absoluteString ?? ""
     }
     
     func loadImage(completion: @escaping (String, Response<(UIImage)>) -> Void) {
-        let url = content.multimedias?.last?.url ?? content.thumbnailImageURL
-        guard let imageURL = url else { return }
+        guard let imageURL = multimedia.url else { return }
         downloadImageService.download(url: imageURL) { [weak self] (response) in
             DispatchQueue.main.async {
                 guard let strongSelf = self else { return }

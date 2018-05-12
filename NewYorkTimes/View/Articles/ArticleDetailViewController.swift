@@ -47,6 +47,11 @@ extension ArticleDetailViewController: UITableViewDataSource {
             cell.set(viewModel: itemViewModel)
             return cell
         }
+        if let itemViewModel = itemViewModel as? ArticleImageTableViewCellViewModel {
+            let cell = tableView.dequeueReusableCell(type: ArticleImageTableViewCell.self, for: indexPath)
+            cell.set(viewModel: itemViewModel)
+            return cell
+        }
         return UITableViewCell()
     }
 }
@@ -58,6 +63,7 @@ extension ArticleDetailViewController {
         tableView.register(type: ArticleTitleTableViewCell.self)
         tableView.register(type: ArticleAggregateTableViewCell.self)
         tableView.register(type: ArticleSnippetTableViewCell.self)
+        tableView.register(type: ArticleImageTableViewCell.self)
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableViewAutomaticDimension
