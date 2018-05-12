@@ -22,17 +22,17 @@ final class ContentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var snippetLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    fileprivate var content: ContentCollectionViewCellProtocol?
+    fileprivate var viewModel: ContentCollectionViewCellProtocol?
 
-    func set(content: ContentCollectionViewCellProtocol) {
-        self.content = content
-        titleLabel.text = content.title
-        snippetLabel.text = content.snippet
-        dateLabel.text = content.date
+    func set(viewModel: ContentCollectionViewCellProtocol) {
+        self.viewModel = viewModel
+        titleLabel.text = viewModel.title
+        snippetLabel.text = viewModel.snippet
+        dateLabel.text = viewModel.date
         imageView.image = nil
-        content.loadImage { [weak self] (id, response) in
+        viewModel.loadImage { [weak self] (id, response) in
             guard let strongSelf = self,
-                strongSelf.content?.id == id else { return }
+                strongSelf.viewModel?.id == id else { return }
             switch response {
             case .success(let image):
                 strongSelf.imageView.image = image;

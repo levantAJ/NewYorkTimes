@@ -13,10 +13,10 @@ final class HomeViewModel {
     var onReloadData: (() -> Void)?
     var onMoreData: (([ContentCollectionViewCellViewModel]) -> Void)?
     
+    fileprivate(set) var contents: [ContentCollectionViewCellViewModel]
     fileprivate let contentSerivce: ContentServiceApiProtocol
     fileprivate var currentPageIndex: UInt
     fileprivate var downloadImageService: DownloadImageServiceProtocol
-    fileprivate var contents: [ContentCollectionViewCellViewModel]
     fileprivate var isLoading: Bool = false
     
     init(contentSerivce: ContentServiceApiProtocol) {

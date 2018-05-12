@@ -28,10 +28,40 @@
         <!--Page View Controller-->
         <scene sceneID="TTj-0p-mdM">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="P6I-Vw-6HL" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="ArticlesPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="P6I-Vw-6HL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clm-OK-3O0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-427" y="29"/>
+        </scene>
+        <!--Article Detail View Controller-->
+        <scene sceneID="eR4-IO-8QE">
+            <objects>
+                <viewController storyboardIdentifier="ArticleDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SkG-Fn-HZw" customClass="ArticleDetailViewController" customModule="NewYorkTimes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XZi-qw-cM0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j5r-aB-J6r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j5r-aB-J6r" firstAttribute="trailing" secondItem="Kvf-Sy-lWR" secondAttribute="trailing" id="4HK-gx-yO3"/>
+                            <constraint firstItem="j5r-aB-J6r" firstAttribute="top" secondItem="XZi-qw-cM0" secondAttribute="top" id="igr-b0-NAo"/>
+                            <constraint firstItem="j5r-aB-J6r" firstAttribute="leading" secondItem="Kvf-Sy-lWR" secondAttribute="leading" id="nyi-ab-DOi"/>
+                            <constraint firstItem="j5r-aB-J6r" firstAttribute="bottom" secondItem="Kvf-Sy-lWR" secondAttribute="bottom" id="q98-cB-CCX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Kvf-Sy-lWR"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="j5r-aB-J6r" id="d7C-ZR-xZQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZVd-Yv-dCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285.60000000000002" y="27.436281859070466"/>
         </scene>
     </scenes>
 </document>

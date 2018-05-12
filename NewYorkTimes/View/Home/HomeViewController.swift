@@ -23,8 +23,9 @@ final class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.HomeViewController.ToArticlesIdentifier {
             let articlesVC = segue.destination as! ArticlesViewController
-            let content = sender as! ContentCollectionViewCellViewModel
-            articlesVC.viewModel = ArticlesViewModel(content: content.content)
+            let index = sender as! Int
+            let contents = viewModel.contents.map { $0.content }
+            articlesVC.viewModel = ArticlesViewModel(contents: contents, currentIndex: index)
         }
     }
 }
@@ -39,7 +40,7 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: ContentCollectionViewCell.self, for: indexPath)
         if let content = viewModel.content(at: indexPath.item) {
-            cell.set(content: content)
+            cell.set(viewModel: content)
         }
         return cell
     }
@@ -59,8 +60,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let content = viewModel.content(at: indexPath.item) else { return }
-        performSegue(withIdentifier: Constant.HomeViewController.ToArticlesIdentifier, sender: content)
+        performSegue(withIdentifier: Constant.HomeViewController.ToArticlesIdentifier, sender: indexPath.item)
     }
 }
 
