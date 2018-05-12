@@ -38,8 +38,7 @@ class ContentTest: XCTestCase {
                 ["url": url,
                  "type": "image",
                  "format": "Normal"],
-            ],
-            ])
+            ]])
         
         //When:
         sut.mapping(map: mapping)

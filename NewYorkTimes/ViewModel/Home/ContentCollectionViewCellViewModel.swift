@@ -9,8 +9,15 @@
 import UIKit
 import Foundation
 
-struct ContentCollectionViewCellViewModel {
-    let content: Content
+final class ContentCollectionViewCellViewModel {
+    fileprivate let content: Content
+    fileprivate let downloadImageService: DownloadImageServiceProtocol
+    fileprivate var image: UIImage?
+    
+    init(content: Content, downloadImageService: DownloadImageServiceProtocol) {
+        self.content = content
+        self.downloadImageService = downloadImageService
+    }
 }
 
 // MARK: - ContentCollectionViewCellProtocol
@@ -31,8 +38,20 @@ extension ContentCollectionViewCellViewModel: ContentCollectionViewCellProtocol 
     var snippet: String {
         return content.abstract ?? ""
     }
-   
-    func loadImage(completion: (String, UIImage?) -> Void) {
-        
+    
+    func loadImage(completion: @escaping (String, Response<(UIImage)>) -> Void) {
+        let url = content.multimedias?.last?.url ?? content.thumbnailImageURL
+        guard let imageURL = url else { return }
+        downloadImageService.download(url: imageURL) { [weak self] (response) in
+            DispatchQueue.main.async {
+                guard let strongSelf = self else { return }
+                switch response {
+                case .success(let image):
+                    completion(strongSelf.id, .success(image))
+                case .failure(let error):
+                    completion(strongSelf.id, .failure(error))
+                }
+            }
+        }
     }
 }

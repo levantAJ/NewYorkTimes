@@ -23,8 +23,10 @@ class HomeViewModelTest: XCTestCase {
     func testRefreshSuccess() {
         //Given:
         let content = mockedContent()
+        let contents =  [content, content, content]
         let succeedExpectation = XCTestExpectation(description: #function + "onReloadData")
-        sut.onReloadData = {
+        sut.onReloadData = { [weak self] in
+            XCTAssertEqual(self?.sut.numberOfRows, contents.count)
             succeedExpectation.fulfill()
         }
         
@@ -36,7 +38,7 @@ class HomeViewModelTest: XCTestCase {
         
         //When:
         sut.refresh()
-        contentSerivce.completion?(.success([content]))
+        contentSerivce.completion?(.success(contents))
         
         //Then:
         XCTAssertEqual(contentSerivce.pageIndex, 0)
@@ -55,7 +57,8 @@ class HomeViewModelTest: XCTestCase {
         }
         
         let erroredExpectation = XCTestExpectation(description: #function + "onError")
-        sut.onError = { errorMessage in
+        sut.onError = { [weak self] errorMessage in
+            XCTAssertEqual(self?.sut.numberOfRows, 0)
             XCTAssertEqual(errorMessage, message)
             erroredExpectation.fulfill()
         }
@@ -74,12 +77,12 @@ class HomeViewModelTest: XCTestCase {
         //TODO:
     }
     
-    func testNumberOfRows () {
-        //TODO:
+    func testNumberOfRows() {
+        XCTAssertEqual(sut.numberOfRows, 0)
     }
     
     func testContentAtIndex() {
-        //TODO:
+        XCTAssertNil(sut.content(at: 0))
     }
     
 }

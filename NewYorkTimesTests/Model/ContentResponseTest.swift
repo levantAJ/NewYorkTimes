@@ -7,28 +7,45 @@
 //
 
 import XCTest
+@testable import NewYorkTimes
 
 class ContentResponseTest: XCTestCase {
     
+    var sut: ContentResponse!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = ContentResponse()
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testMapping() {
+        //Given:
+        let mapping = Mapping(json: [
+            "status": "OK",
+            "results": [
+                ["title": "title",
+                 "abstract": "abstract",
+                 "url": "url",
+                 "thumbnail_standard": "thumbnailImageURL",
+                 "published_date": "publishedDate",
+                 "multimedia":[
+                    ["url": "url",
+                     "type": "",
+                     "format": "mediumThreeByTwo210"],
+                    ["url": "url",
+                     "type": "image",
+                     "format": "Normal"],
+                    ]]]])
+        
+        //When:
+        sut.mapping(map: mapping)
+        
+        //Then
+        XCTAssertEqual(sut.status, .ok)
+        XCTAssertEqual(sut.contents.count, 1)
+        if sut.contents.count == 1 {
+            XCTAssertEqual(sut.contents[0].title, "title")
+            XCTAssertEqual(sut.contents[0].abstract, "abstract")
         }
     }
     

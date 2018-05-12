@@ -13,7 +13,7 @@ protocol ContentCollectionViewCellProtocol {
     var title: String { get }
     var date: String { get }
     var snippet: String { get }
-    func loadImage(completion: (String, UIImage?) -> Void)
+    func loadImage(completion: @escaping (String, Response<(UIImage)>) -> Void)
 }
 
 final class ContentCollectionViewCell: UICollectionViewCell {
@@ -22,7 +22,6 @@ final class ContentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var snippetLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
-    
     fileprivate var content: ContentCollectionViewCellProtocol?
 
     func set(content: ContentCollectionViewCellProtocol) {
@@ -30,10 +29,17 @@ final class ContentCollectionViewCell: UICollectionViewCell {
         titleLabel.text = content.title
         snippetLabel.text = content.snippet
         dateLabel.text = content.date
-        content.loadImage { [weak self] (id, image) in
+        imageView.image = nil
+        content.loadImage { [weak self] (id, response) in
             guard let strongSelf = self,
                 strongSelf.content?.id == id else { return }
-            strongSelf.imageView.image = image;
+            switch response {
+            case .success(let image):
+                strongSelf.imageView.image = image;
+            case .failure(let error):
+                //TODO: Handle to show error here
+                debugPrint(error.localizedDescription)
+            }
         }
     }
 }

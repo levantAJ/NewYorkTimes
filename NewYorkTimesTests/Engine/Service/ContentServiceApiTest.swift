@@ -12,7 +12,7 @@ import XCTest
 class ContentServiceApiTest: XCTestCase {
     
     var sut: ContentServiceApi!
-    var request: RequestServiceMock<Content>!
+    var request: RequestServiceMock<ContentResponse>!
     
     override func setUp() {
         super.setUp()
@@ -24,6 +24,7 @@ class ContentServiceApiTest: XCTestCase {
         //Given:
         let expectation = XCTestExpectation(description: #function)
         let expectedContent = Content()
+        let contentResponse = ContentResponse(status: .ok, contents: [expectedContent])
         
         //When:
         sut.request(pageIndex: 0, pageSize: 0) { response in
@@ -38,7 +39,28 @@ class ContentServiceApiTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        request.arrayCompletion?(.success([expectedContent]))
+        request.objectCompletion?(.success(contentResponse))
+        
+        //Then:
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testRequestFailureCannotReachServer() {
+        //Given:
+        let expectation = XCTestExpectation(description: #function)
+        let contentResponse = ContentResponse(status: .unknown, contents: [])
+        
+        //When:
+        sut.request(pageIndex: 0, pageSize: 0) { response in
+            switch response {
+            case .success(let value):
+                XCTAssertNil(value)
+            case .failure(let error):
+                XCTAssertEqual(APIError.serverError.error, error as NSError)
+            }
+            expectation.fulfill()
+        }
+        request.objectCompletion?(.success(contentResponse))
         
         //Then:
         wait(for: [expectation], timeout: 0.1)
@@ -59,7 +81,7 @@ class ContentServiceApiTest: XCTestCase {
             }
             expectation.fulfill()
         }
-        request.arrayCompletion?(.failure(expectedError))
+        request.objectCompletion?(.failure(expectedError))
         
         //Then:
         wait(for: [expectation], timeout: 0.1)

@@ -22,8 +22,6 @@ struct ContentServiceApi {
 
 extension ContentServiceApi: ContentServiceApiProtocol {
     func request(pageIndex: UInt, pageSize: UInt, completion: @escaping (Response<[Content]>) -> Void) {
-        let api: API = .getContents(pageIndex: pageIndex, pageSize: pageSize)
-        
         let responseCompletion: (Response<ContentResponse>) -> Void = { response in
             switch response {
             case .success(let contentResponse):
@@ -37,7 +35,7 @@ extension ContentServiceApi: ContentServiceApiProtocol {
                 completion(.failure(error))
             }
         }
-        
+        let api: API = .getContents(pageIndex: pageIndex, pageSize: pageSize)
         request.object(from: api, completion: responseCompletion)
     }
 }

@@ -15,12 +15,14 @@ final class HomeViewModel {
     
     fileprivate let contentSerivce: ContentServiceApiProtocol
     fileprivate var currentPageIndex: UInt
+    fileprivate var downloadImageService: DownloadImageServiceProtocol
     fileprivate var contents: [ContentCollectionViewCellViewModel]
     
     init(contentSerivce: ContentServiceApiProtocol) {
         self.contentSerivce = contentSerivce
         self.currentPageIndex = 0
         self.contents = []
+        self.downloadImageService = DownloadImageService(session: URLSession.shared)
     }
     
     var numberOfRows: Int {
@@ -57,7 +59,7 @@ extension HomeViewModel {
             switch response {
             case .success(let contents):
                 if (strongSelf.currentPageIndex == Constant.API.DefaultPageIndex) {
-                    strongSelf.contents = contents.map { ContentCollectionViewCellViewModel(content: $0) }
+                    strongSelf.contents = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
                     DispatchQueue.main.async {
                         strongSelf.onReloadData?()
                     }
