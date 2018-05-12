@@ -13,7 +13,7 @@
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="NewYorkTimes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="NewYorkTimes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,11 +57,20 @@
                     <connections>
                         <outlet property="collectionView" destination="FL1-7E-nJt" id="47M-kg-hTO"/>
                         <outlet property="loadingView" destination="3ar-TT-XwO" id="tL4-S2-EaD"/>
+                        <segue destination="OTq-iX-tbA" kind="show" identifier="ToArticles" id="Xa7-34-gN0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="997.60000000000002" y="-564.46776611694156"/>
+        </scene>
+        <!--Articles-->
+        <scene sceneID="2Tj-2P-Lfw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Articles" id="OTq-iX-tbA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDn-ew-8fK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1591" y="-565"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gPg-5U-oML">

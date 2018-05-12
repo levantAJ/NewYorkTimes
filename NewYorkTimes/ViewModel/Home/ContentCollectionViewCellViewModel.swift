@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 final class ContentCollectionViewCellViewModel {
-    fileprivate let content: Content
+    let content: Content
     fileprivate let downloadImageService: DownloadImageServiceProtocol
     fileprivate var image: UIImage?
     

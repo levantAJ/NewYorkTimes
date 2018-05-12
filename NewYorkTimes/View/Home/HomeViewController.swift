@@ -19,6 +19,14 @@ final class HomeViewController: UIViewController {
         setupViews()
         setupViewModel()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constant.HomeViewController.ToArticlesIdentifier {
+            let articlesVC = segue.destination as! ArticlesViewController
+            let content = sender as! ContentCollectionViewCellViewModel
+            articlesVC.viewModel = ArticlesViewModel(content: content.content)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -48,6 +56,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegate
         if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
             viewModel.loadMore()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let content = viewModel.content(at: indexPath.item) else { return }
+        performSegue(withIdentifier: Constant.HomeViewController.ToArticlesIdentifier, sender: content)
     }
 }
 
@@ -98,5 +111,11 @@ extension HomeViewController {
             strongSelf.present(alertController, animated: true, completion: nil)
         }
         viewModel.refresh()
+    }
+}
+
+extension Constant {
+    struct HomeViewController {
+        static let ToArticlesIdentifier = "ToArticles"
     }
 }
