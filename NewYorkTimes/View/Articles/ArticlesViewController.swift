@@ -9,7 +9,7 @@
 import UIKit
 
 final class ArticlesViewController: UIViewController {
-    var viewModel: ArticlesViewModel!
+    var viewModel: ArticlesViewModelProtocol!
     
     fileprivate var pageVC: UIPageViewController!
     fileprivate var leftVC: ArticleDetailViewController!

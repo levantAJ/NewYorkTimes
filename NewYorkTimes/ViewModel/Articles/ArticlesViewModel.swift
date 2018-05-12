@@ -6,9 +6,15 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
+protocol ArticlesViewModelProtocol {
+    var currentIndex: Int { get }
+    var detailViewModels: [ArticleDetailViewModel] { get }
+    func detailViewModel(at index: Int) -> ArticleDetailViewModel?
+}
+
 final class ArticlesViewModel {
-    let detailViewModels: [ArticleDetailViewModel]
     let currentIndex: Int
+    let detailViewModels: [ArticleDetailViewModel]
     
     init(contents: [Content], currentIndex: Int) {
         self.currentIndex = currentIndex
@@ -19,7 +25,11 @@ final class ArticlesViewModel {
         }
         self.detailViewModels = viewModels
     }
-    
+}
+
+// MARK: - ArticlesViewModelProtocol
+
+extension ArticlesViewModel: ArticlesViewModelProtocol {
     func detailViewModel(at index: Int) -> ArticleDetailViewModel? {
         if index < detailViewModels.count && index >= 0 {
             return detailViewModels[index]
