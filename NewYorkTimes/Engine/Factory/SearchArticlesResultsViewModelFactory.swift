@@ -8,12 +8,15 @@
 
 import UIKit
 
+extension UserDefaults: UserDefaultsProtocol {}
+
 final class SearchArticlesResultsViewModelFactory {
     static func create() -> SearchArticlesResultsViewModel {
         let session = URLSession.shared
         let request = RequestService(session: session)
         let searchArticlesService = SearchArticlesServiceApi(request: request)
-        let searchArticlesKeywordDatabase = SearchArticlesKeywordDatabaseApi(userDefaults: .standard)
+        let userDefaults = UserDefaults.standard
+        let searchArticlesKeywordDatabase = SearchArticlesKeywordDatabaseApi(userDefaults: userDefaults)
         return SearchArticlesResultsViewModel(searchArticlesService: searchArticlesService, searchArticlesKeywordDatabase: searchArticlesKeywordDatabase)
     }
 }

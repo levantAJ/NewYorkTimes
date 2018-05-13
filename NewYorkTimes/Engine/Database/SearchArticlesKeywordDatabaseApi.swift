@@ -8,15 +8,20 @@
 
 import Foundation
 
+protocol UserDefaultsProtocol {
+    func array(forKey defaultName: String) -> [Any]?
+    func set(_ value: Any?, forKey defaultName: String)
+}
+
 protocol SearchArticlesKeywordDatabaseApiProtocol {
     func request(pageIndex: UInt, pageSize: UInt, completion: @escaping (Response<[String]>) -> Void)
     func add(keyword: String, completion: ((Response<[String]>) -> Void)?)
 }
 
 final class SearchArticlesKeywordDatabaseApi {
-    fileprivate let userDefaults: UserDefaults
+    fileprivate let userDefaults: UserDefaultsProtocol
     
-    init(userDefaults: UserDefaults) {
+    init(userDefaults: UserDefaultsProtocol) {
         self.userDefaults = userDefaults
     }
 }
