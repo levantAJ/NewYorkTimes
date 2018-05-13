@@ -22,6 +22,7 @@
 - Swift 4
 - MVVM
 - The app supported dynamic fonts.
+- How to change `api-key`: Open `API.swift`, go to the bottom, change the value of constant: `NewYorkTimesKey`
 
 
 <img width="513" alt="screen shot 2018-05-14 at 2 02 04 am" src="https://user-images.githubusercontent.com/6329656/39970261-eacf6f70-571a-11e8-897f-688383867967.png">
