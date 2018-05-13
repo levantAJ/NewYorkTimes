@@ -15,14 +15,19 @@ final class SearchArticlesResultsViewModel {
     fileprivate(set) var currentPageIndex: UInt
     fileprivate var searchKeyword: String
     fileprivate let searchArticlesService: SearchArticlesServiceApiProtocol
+    fileprivate let searchArticlesKeywordDatabase: SearchArticlesKeywordDatabaseApiProtocol
     fileprivate(set) var articleViewModels: [SearchArticlesResultsCollectionViewCellProtocol]
+    fileprivate(set) var keywordViewModels: [SearchArticlesKeywordResultsCollectionViewCellProtocol]
     
-    init(searchArticlesService: SearchArticlesServiceApiProtocol) {
+    init(searchArticlesService: SearchArticlesServiceApiProtocol,
+         searchArticlesKeywordDatabase: SearchArticlesKeywordDatabaseApiProtocol) {
+        self.searchArticlesService = searchArticlesService
+        self.searchArticlesKeywordDatabase = searchArticlesKeywordDatabase
         self.isLoading = false
         self.currentPageIndex = 0
         self.searchKeyword = ""
-        self.searchArticlesService = searchArticlesService
         self.articleViewModels = []
+        self.keywordViewModels = []
     }
     
     func search(keyword: String) {

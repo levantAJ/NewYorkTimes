@@ -13,6 +13,7 @@ final class SearchArticlesResultsViewModelFactory {
         let session = URLSession.shared
         let request = RequestService(session: session)
         let searchArticlesService = SearchArticlesServiceApi(request: request)
-        return SearchArticlesResultsViewModel(searchArticlesService: searchArticlesService)
+        let searchArticlesKeywordDatabase = SearchArticlesKeywordDatabaseApi(userDefaults: .standard)
+        return SearchArticlesResultsViewModel(searchArticlesService: searchArticlesService, searchArticlesKeywordDatabase: searchArticlesKeywordDatabase)
     }
 }

@@ -34,6 +34,9 @@
 		3396E94D20A7E25D00D2987D /* SearchArticlesResultsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3396E94B20A7E25D00D2987D /* SearchArticlesResultsCollectionViewCell.xib */; };
 		3396E94F20A7E45100D2987D /* SearchArticlesResultsCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E94E20A7E45100D2987D /* SearchArticlesResultsCollectionViewCellViewModel.swift */; };
 		3396E95120A7F44700D2987D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E95020A7F44700D2987D /* String.swift */; };
+		3396E95420A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E95220A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.swift */; };
+		3396E95520A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3396E95320A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.xib */; };
+		3396E95D20A80E7100D2987D /* SearchArticlesKeywordDatabaseApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396E95C20A80E7100D2987D /* SearchArticlesKeywordDatabaseApi.swift */; };
 		339C351A20A74CAB0061B054 /* ContentCollectionViewCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C351920A74CAB0061B054 /* ContentCollectionViewCellTest.swift */; };
 		339C351C20A74E220061B054 /* ContentCollectionViewCellViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C351B20A74E220061B054 /* ContentCollectionViewCellViewModelMock.swift */; };
 		339C351F20A751300061B054 /* ArticleTitleTableViewCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339C351E20A751300061B054 /* ArticleTitleTableViewCellTest.swift */; };
@@ -150,6 +153,9 @@
 		3396E94B20A7E25D00D2987D /* SearchArticlesResultsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchArticlesResultsCollectionViewCell.xib; sourceTree = "<group>"; };
 		3396E94E20A7E45100D2987D /* SearchArticlesResultsCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		3396E95020A7F44700D2987D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3396E95220A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordResultsCollectionViewCell.swift; sourceTree = "<group>"; };
+		3396E95320A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchArticlesKeywordResultsCollectionViewCell.xib; sourceTree = "<group>"; };
+		3396E95C20A80E7100D2987D /* SearchArticlesKeywordDatabaseApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordDatabaseApi.swift; sourceTree = "<group>"; };
 		339C351920A74CAB0061B054 /* ContentCollectionViewCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCellTest.swift; sourceTree = "<group>"; };
 		339C351B20A74E220061B054 /* ContentCollectionViewCellViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCellViewModelMock.swift; sourceTree = "<group>"; };
 		339C351E20A751300061B054 /* ArticleTitleTableViewCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleTableViewCellTest.swift; sourceTree = "<group>"; };
@@ -332,6 +338,14 @@
 			path = Factory;
 			sourceTree = "<group>";
 		};
+		3396E95B20A80E4800D2987D /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				3396E95C20A80E7100D2987D /* SearchArticlesKeywordDatabaseApi.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
 		339C351820A74C1C0061B054 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +493,7 @@
 			children = (
 				33F6715A20A5C16C000C7BB5 /* Constant */,
 				33F6715920A5C0CF000C7BB5 /* Service */,
+				3396E95B20A80E4800D2987D /* Database */,
 				33EBB37E20A6A6CA004DCC56 /* Extension */,
 				33F6716A20A5D9A3000C7BB5 /* Utility */,
 				3396E94920A7DDF600D2987D /* Factory */,
@@ -635,6 +650,8 @@
 				33FA9A5020A7C5290028456D /* SearchArticlesResultsViewController.swift */,
 				3396E94A20A7E25D00D2987D /* SearchArticlesResultsCollectionViewCell.swift */,
 				3396E94B20A7E25D00D2987D /* SearchArticlesResultsCollectionViewCell.xib */,
+				3396E95220A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.swift */,
+				3396E95320A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.xib */,
 			);
 			path = SearchArticles;
 			sourceTree = "<group>";
@@ -760,6 +777,7 @@
 				33FA9A4E20A7C4F40028456D /* SearchArticles.storyboard in Resources */,
 				33A8705D20A71E27007BC90A /* ArticleImageTableViewCell.xib in Resources */,
 				33F6712D20A5BE2D000C7BB5 /* Assets.xcassets in Resources */,
+				3396E95520A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.xib in Resources */,
 				33F6712B20A5BE2C000C7BB5 /* Home.storyboard in Resources */,
 				3321256D20A6F3120014A56F /* Articles.storyboard in Resources */,
 				33A8704720A6FF86007BC90A /* ArticleTitleTableViewCell.xib in Resources */,
@@ -800,6 +818,7 @@
 				33F6716920A5D8F9000C7BB5 /* Mappable.swift in Sources */,
 				33F6717620A5E223000C7BB5 /* DateFormat.swift in Sources */,
 				33A8704D20A7035D007BC90A /* UITableView.swift in Sources */,
+				3396E95420A8003000D2987D /* SearchArticlesKeywordResultsCollectionViewCell.swift in Sources */,
 				33F6716F20A5DA1F000C7BB5 /* Mapper.swift in Sources */,
 				33A8704B20A700AB007BC90A /* ArticleDetailViewModel.swift in Sources */,
 				33A8705F20A71E91007BC90A /* ImageLoadable.swift in Sources */,
@@ -824,6 +843,7 @@
 				33F6716C20A5D9B2000C7BB5 /* Mapping.swift in Sources */,
 				33F6715C20A5C18D000C7BB5 /* Constant.swift in Sources */,
 				33F8364820A667840044F253 /* APIError.swift in Sources */,
+				3396E95D20A80E7100D2987D /* SearchArticlesKeywordDatabaseApi.swift in Sources */,
 				33EBB38420A6AE82004DCC56 /* ContentResponse.swift in Sources */,
 				33A8705C20A71E27007BC90A /* ArticleImageTableViewCell.swift in Sources */,
 				33EBB37D20A6A258004DCC56 /* ContentCollectionViewCellViewModel.swift in Sources */,
