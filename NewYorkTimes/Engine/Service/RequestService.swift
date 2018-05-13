@@ -24,7 +24,7 @@ protocol RequestServiceProtocol {
     func array<T: Mappable>(from api: API, completion: @escaping (Response<[T]>) -> Void)
 }
 
-struct RequestService {
+final class RequestService {
     fileprivate let session: URLSessionProtocol
     
     init(session: URLSessionProtocol) {

@@ -6,8 +6,12 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
-struct ArticleAggregateTableViewCellViewModel {
+final class ArticleAggregateTableViewCellViewModel {
     let content: Content
+    
+    init(content: Content) {
+        self.content = content
+    }
 }
 
 // MARK: - ArticleAggregateTableViewCellProtocol

@@ -6,8 +6,12 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
-struct ArticleTitleTableViewCellViewModel {
+final class ArticleTitleTableViewCellViewModel {
     let content: Content
+    
+    init(content: Content) {
+        self.content = content
+    }
 }
 
 extension ArticleTitleTableViewCellViewModel: ArticleTitleTableViewCellProtocol {

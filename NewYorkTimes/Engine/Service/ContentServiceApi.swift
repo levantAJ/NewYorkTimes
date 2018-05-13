@@ -10,7 +10,7 @@ protocol ContentServiceApiProtocol {
     func request(pageIndex: UInt, pageSize: UInt, completion: @escaping (Response<[Content]>) -> Void)
 }
 
-struct ContentServiceApi {
+final class ContentServiceApi {
     fileprivate let request: RequestServiceProtocol
     
     init(request: RequestServiceProtocol) {

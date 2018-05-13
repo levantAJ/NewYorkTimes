@@ -13,6 +13,8 @@ final class HomeViewController: UIViewController {
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     fileprivate var refreshControl: UIRefreshControl!
     fileprivate var viewModel: HomeViewModel!
+    fileprivate var searchArticlesVC: SearchArticlesResultsViewController!
+    fileprivate var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +78,8 @@ extension HomeViewController {
 
 extension HomeViewController {
     fileprivate func setupViews() {
+        title = NSLocalizedString("The New York Times", comment: "")
+        
         collectionView.register(type: ContentCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -83,6 +87,14 @@ extension HomeViewController {
         refreshControl = UIRefreshControl(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         refreshControl.addTarget(self, action: #selector(refreshControlValueChanged), for: .valueChanged)
         collectionView.addSubview(refreshControl)
+        
+        searchArticlesVC = UIStoryboard.viewController(screenName: String(describing: SearchArticlesResultsViewController.self), storyboardName: "SearchArticles") as! SearchArticlesResultsViewController
+        searchController = UISearchController(searchResultsController: searchArticlesVC)
+        searchController.searchResultsUpdater = searchArticlesVC
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = NSLocalizedString("Search Articles", comment: "")
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     fileprivate func setupViewModel() {

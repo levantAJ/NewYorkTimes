@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ArticleDetailViewModel {
+final class ArticleDetailViewModel {
     let index: Int
     let content: Content
     let itemViewModels: [Any]

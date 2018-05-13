@@ -13,7 +13,7 @@ protocol DownloadImageServiceProtocol {
     func download(url: URL, completion: @escaping (Response<UIImage>) -> Void)
 }
 
-struct DownloadImageService {
+final class DownloadImageService {
     fileprivate let session: URLSessionProtocol
     
     init(session: URLSessionProtocol) {

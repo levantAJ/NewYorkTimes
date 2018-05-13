@@ -8,8 +8,12 @@
 
 import UIKit
 
-struct ArticleSnippetTableViewCellViewModel {
+final class ArticleSnippetTableViewCellViewModel {
     let content: Content
+    
+    init(content: Content) {
+        self.content = content
+    }
 }
 
 // MARK: - ArticleSnippetTableViewCellProtocol
