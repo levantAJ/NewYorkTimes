@@ -110,7 +110,7 @@ extension SearchArticlesResultsViewController {
             strongSelf.searchMessageLabel.text = errorMessage
             strongSelf.searchMessageLabel.isHidden = false
         }
-        viewModel.onReloadData = { [weak self] errorMessage in
+        viewModel.onReloadData = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.searchMessageLabel.isHidden = true
             strongSelf.collectionView.reloadData()

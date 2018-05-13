@@ -69,7 +69,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegate
 // MARK: - Users Interactions
 
 extension HomeViewController {
-    func refreshControlValueChanged() {
+    @objc func refreshControlValueChanged() {
         viewModel.refresh()
     }
 }
