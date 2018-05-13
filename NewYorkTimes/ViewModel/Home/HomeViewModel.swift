@@ -42,18 +42,18 @@ final class HomeViewModel {
 
 extension HomeViewModel: Pageable {
     func refresh() {
-        request(pageIndex: 0)
+        retrieveContents(pageIndex: 0)
     }
     
     func loadMore() {
-        request(pageIndex: currentPageIndex + 1)
+        retrieveContents(pageIndex: currentPageIndex + 1)
     }
 }
 
 // MARK : - Privates
 
 extension HomeViewModel {
-    fileprivate func request(pageIndex: UInt) {
+    fileprivate func retrieveContents(pageIndex: UInt) {
         guard !isLoading else { return } //Avoid making multiple requests a the same time.
         isLoading = true
         currentPageIndex = pageIndex

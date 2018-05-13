@@ -16,10 +16,14 @@ final class SearchArticlesResultsViewController: UIViewController {
     var viewModel: SearchArticlesResultsViewModel!
     fileprivate var heightCalculatingCell: SearchArticlesResultsCollectionViewCell!
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupViewModel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupViewModel()
     }
 }
 
@@ -40,8 +44,11 @@ extension SearchArticlesResultsViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
-        loadingView.startAnimating()
         viewModel.search(keyword: keyword)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        viewModel.retrieveRecentlyKeywords()
     }
 }
 
@@ -53,19 +60,36 @@ extension SearchArticlesResultsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(type: SearchArticlesResultsCollectionViewCell.self, for: indexPath)
-        if let articleViewModel = viewModel.articleViewModel(at: indexPath.item) {
+        let articleViewModel = viewModel.articleViewModel(at: indexPath.item)
+        if let articleViewModel = articleViewModel as? SearchArticlesResultsCollectionViewCellViewModel {
+            let cell = collectionView.dequeueReusableCell(type: SearchArticlesResultsCollectionViewCell.self, for: indexPath)
             cell.set(viewModel: articleViewModel)
+            return cell
         }
-        return cell
+        if let articleViewModel = articleViewModel as? SearchArticlesKeywordResultsCollectionViewCellViewModel {
+            let cell = collectionView.dequeueReusableCell(type: SearchArticlesKeywordResultsCollectionViewCell.self, for: indexPath)
+            cell.set(viewModel: articleViewModel)
+            return cell
+        }
+        return UICollectionViewCell()
     }
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 
-extension SearchArticlesResultsViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension SearchArticlesResultsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return cellSize(at: indexPath.item)
+    }
+}
+
+// MARK: - UICollectionViewDelegate,
+
+extension SearchArticlesResultsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let articleViewModel = viewModel.articleViewModel(at: indexPath.item) as? SearchArticlesKeywordResultsCollectionViewCellProtocol else { return }
+        loadingView.startAnimating()
+        viewModel.search(keyword: articleViewModel.title)
     }
 }
 
@@ -74,6 +98,7 @@ extension SearchArticlesResultsViewController: UICollectionViewDelegate, UIColle
 extension SearchArticlesResultsViewController {
     fileprivate func setupViews() {
         collectionView.register(type: SearchArticlesResultsCollectionViewCell.self)
+        collectionView.register(type: SearchArticlesKeywordResultsCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
     }
@@ -82,29 +107,38 @@ extension SearchArticlesResultsViewController {
         viewModel = SearchArticlesResultsViewModelFactory.create()
         viewModel.onError = { [weak self] errorMessage in
             guard let strongSelf = self else { return }
-            strongSelf.loadingView.stopAnimating()
             strongSelf.searchMessageLabel.text = errorMessage
             strongSelf.searchMessageLabel.isHidden = false
         }
         viewModel.onReloadData = { [weak self] errorMessage in
             guard let strongSelf = self else { return }
-            strongSelf.loadingView.stopAnimating()
             strongSelf.searchMessageLabel.isHidden = true
             strongSelf.collectionView.reloadData()
+        }
+        viewModel.onLoading = { [weak self] loadingStarted in
+            guard let strongSelf = self else { return }
+            if loadingStarted {
+                strongSelf.loadingView.startAnimating()
+            } else {
+                strongSelf.loadingView.stopAnimating()
+            }
         }
     }
     
     fileprivate func cellSize(at index: Int) -> CGSize {
-        guard let articleViewModel = viewModel.articleViewModel(at: index) else { return .zero }
-        if let size = articleViewModel.cachedSize {
+        let width = view.bounds.width
+        if let articleViewModel = viewModel.articleViewModel(at: index) as? SearchArticlesResultsCollectionViewCellProtocol {
+            if let size = articleViewModel.cachedSize {
+                return size
+            }
+            if heightCalculatingCell == nil {
+                heightCalculatingCell = Bundle.main.loadNibNamed(String(describing: SearchArticlesResultsCollectionViewCell.self), owner: nil)!.first as! SearchArticlesResultsCollectionViewCell
+                heightCalculatingCell.frame = CGRect(x: 0, y: 0, width: width, height: 100)
+            }
+            let size = CGSize(width: width, height: heightCalculatingCell.height(for: articleViewModel))
+            articleViewModel.cachedSize = size //Cache size to improve scrolling
             return size
         }
-        if heightCalculatingCell == nil {
-            heightCalculatingCell = Bundle.main.loadNibNamed(String(describing: SearchArticlesResultsCollectionViewCell.self), owner: nil)!.first as! SearchArticlesResultsCollectionViewCell
-            heightCalculatingCell.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 100)
-        }
-        let size = CGSize(width: view.bounds.width, height: heightCalculatingCell.height(for: articleViewModel))
-        articleViewModel.cachedSize = size //Cache size to improve scrolling 
-        return size
+        return CGSize(width: width, height: 44)
     }
 }

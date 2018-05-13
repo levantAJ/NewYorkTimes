@@ -8,7 +8,10 @@
 
 import Foundation
 
+protocol SearchArticlesResultsCellViewModelProtocol: class {}
+
 final class SearchArticlesResultsViewModel {
+    var onLoading: ((Bool) -> Void)?
     var onError: ((String) -> Void)?
     var onReloadData: (() -> Void)?
     fileprivate(set) var isLoading: Bool
@@ -16,8 +19,7 @@ final class SearchArticlesResultsViewModel {
     fileprivate var searchKeyword: String
     fileprivate let searchArticlesService: SearchArticlesServiceApiProtocol
     fileprivate let searchArticlesKeywordDatabase: SearchArticlesKeywordDatabaseApiProtocol
-    fileprivate(set) var articleViewModels: [SearchArticlesResultsCollectionViewCellProtocol]
-    fileprivate(set) var keywordViewModels: [SearchArticlesKeywordResultsCollectionViewCellProtocol]
+    fileprivate(set) var articleViewModels: [SearchArticlesResultsCellViewModelProtocol]
     
     init(searchArticlesService: SearchArticlesServiceApiProtocol,
          searchArticlesKeywordDatabase: SearchArticlesKeywordDatabaseApiProtocol) {
@@ -27,15 +29,31 @@ final class SearchArticlesResultsViewModel {
         self.currentPageIndex = 0
         self.searchKeyword = ""
         self.articleViewModels = []
-        self.keywordViewModels = []
     }
     
     func search(keyword: String) {
         searchKeyword = keyword
-        request(pageIndex: 0)
+        onLoading?(true)
+        articleViewModels = []
+        onReloadData?()
+        searchArticlesKeywordDatabase.add(keyword: keyword, completion: nil)
+        retrieveArticles(pageIndex: 0)
     }
     
-    func articleViewModel(at index: Int) -> SearchArticlesResultsCollectionViewCellProtocol? {
+    func retrieveRecentlyKeywords() {
+        searchArticlesKeywordDatabase.request(pageIndex: 0, pageSize: 10) { [weak self] response in
+            guard let strongSelf = self else { return }
+            switch response {
+            case .success(let keywords):
+                strongSelf.articleViewModels = keywords.map { SearchArticlesKeywordResultsCollectionViewCellViewModel(keyword: $0) }
+                strongSelf.onReloadData?()
+            case .failure(let error):
+                strongSelf.onError?(error.localizedDescription)
+            }
+        }
+    }
+    
+    func articleViewModel(at index: Int) -> SearchArticlesResultsCellViewModelProtocol? {
         if index >= 0 && index < articleViewModels.count {
             return articleViewModels[index]
         }
@@ -47,18 +65,18 @@ final class SearchArticlesResultsViewModel {
 
 extension SearchArticlesResultsViewModel: Pageable {
     func refresh() {
-        request(pageIndex: 0)
+        retrieveArticles(pageIndex: 0)
     }
     
     func loadMore() {
-        request(pageIndex: currentPageIndex + 1)
+        retrieveArticles(pageIndex: currentPageIndex + 1)
     }
 }
 
 // MARK : - Privates
 
 extension SearchArticlesResultsViewModel {
-    fileprivate func request(pageIndex: UInt) {
+    fileprivate func retrieveArticles(pageIndex: UInt) {
         guard !isLoading else { return } //Avoid making multiple requests a the same time.
         isLoading = true
         currentPageIndex = pageIndex
@@ -82,6 +100,9 @@ extension SearchArticlesResultsViewModel {
                 DispatchQueue.main.async {
                     strongSelf.onError?(error.localizedDescription)
                 }
+            }
+            DispatchQueue.main.async {
+                strongSelf.onLoading?(false)
             }
         }
     }

@@ -8,7 +8,14 @@
 
 import UIKit
 
-protocol SearchArticlesKeywordResultsCollectionViewCellProtocol {}
+protocol SearchArticlesKeywordResultsCollectionViewCellProtocol: SearchArticlesResultsCellViewModelProtocol {
+    var title: String { get }
+}
 
 final class SearchArticlesKeywordResultsCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    func set(viewModel: SearchArticlesKeywordResultsCollectionViewCellProtocol) {
+        titleLabel.text = viewModel.title
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchArticlesResultsCollectionViewCellProtocol: class {
+protocol SearchArticlesResultsCollectionViewCellProtocol: SearchArticlesResultsCellViewModelProtocol {
     var title: String { get }
     var snippet: String { get }
     var cachedSize: CGSize? { get set } //Cache size to improve scrolling

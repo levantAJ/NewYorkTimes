@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SearchArticlesKeywordDatabaseApiProtocol {
-    func request(pageIndex: UInt, pageSize: UInt, completion: (Response<[String]>) -> Void)
+    func request(pageIndex: UInt, pageSize: UInt, completion: @escaping (Response<[String]>) -> Void)
     func add(keyword: String, completion: ((Response<[String]>) -> Void)?)
 }
 
@@ -24,17 +24,37 @@ final class SearchArticlesKeywordDatabaseApi {
 // MARK: - SearchArticlesKeywordDatabaseApiProtocol
 
 extension SearchArticlesKeywordDatabaseApi: SearchArticlesKeywordDatabaseApiProtocol {
-    func request(pageIndex: UInt, pageSize: UInt, completion: (Response<[String]>) -> Void) {
-        let lower = Int(pageIndex * pageSize)
-        let upper = lower + Int(pageSize)
-        let keywords = Array(getKeywords()[lower..<upper])
-        completion(.success(keywords))
+    func request(pageIndex: UInt, pageSize: UInt, completion: @escaping (Response<[String]>) -> Void) {
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else { return }
+            let keywords = strongSelf.getKeywords()
+            let lower = Int(pageIndex * pageSize)
+            let pagedKeywords: [String]
+            if lower >= keywords.count {
+                pagedKeywords = []
+            } else {
+                let upper = min(lower + Int(pageSize), keywords.count)
+                pagedKeywords = Array(keywords[lower..<upper])
+            }
+            DispatchQueue.main.async {
+                completion(.success(pagedKeywords))
+            }
+        }
     }
     
     func add(keyword: String, completion: ((Response<[String]>) -> Void)? = nil) {
-        let keywords = [keyword] + getKeywords()
-        userDefaults.set(keywords, forKey: Constant.SearchArticlesKeywordDatabaseApi.UserDefaultsKey)
-        completion?(.success(keywords))
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else { return }
+            var keywords = strongSelf.getKeywords()
+            if let index = keywords.index(of: keyword) {
+                keywords.remove(at: index)
+            }
+            keywords = [keyword] + keywords
+            strongSelf.userDefaults.set(keywords, forKey: Constant.SearchArticlesKeywordDatabaseApi.UserDefaultsKey)
+            DispatchQueue.main.async {
+                completion?(.success(keywords))
+            }
+        }
     }
 }
 
