@@ -12,6 +12,7 @@ protocol ContentCollectionViewCellProtocol: ImageLoadable {
     var title: String { get }
     var date: String { get }
     var snippet: String { get }
+    var content: Content { get }
 }
 
 final class ContentCollectionViewCell: UICollectionViewCell {

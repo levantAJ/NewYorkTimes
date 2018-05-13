@@ -10,6 +10,13 @@ import Foundation
 
 protocol ArticleDetailItemViewModelProtocol {}
 
+protocol ArticleDetailViewModelProtocol {
+    var index: Int { get }
+    var content: Content { get }
+    var itemViewModels: [ArticleDetailItemViewModelProtocol] { get }
+    func itemViewModel(at index: Int) -> ArticleDetailItemViewModelProtocol?
+}
+
 final class ArticleDetailViewModel {
     let index: Int
     let content: Content
@@ -30,8 +37,12 @@ final class ArticleDetailViewModel {
         }
         itemViewModels = viewModels
     }
-    
-    func itemViewModel(at index: Int) -> Any? {
+}
+
+// MARK: - ArticleDetailViewModelProtocol
+
+extension ArticleDetailViewModel: ArticleDetailViewModelProtocol {
+    func itemViewModel(at index: Int) -> ArticleDetailItemViewModelProtocol? {
         if index < itemViewModels.count {
             return itemViewModels[index]
         }

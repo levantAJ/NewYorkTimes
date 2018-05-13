@@ -10,15 +10,25 @@ import Foundation
 
 protocol SearchArticlesResultsCellViewModelProtocol: class {}
 
+protocol SearchArticlesResultsViewModelProtocol {
+    var onLoading: ((Bool) -> Void)? { get set }
+    var onError: ((String) -> Void)? { get set }
+    var onReloadData: (() -> Void)? { get set }
+    var articleViewModels: [SearchArticlesResultsCellViewModelProtocol] { get }
+    func search(keyword: String)
+    func retrieveRecentlyKeywords()
+    func articleViewModel(at index: Int) -> SearchArticlesResultsCellViewModelProtocol?
+}
+
 final class SearchArticlesResultsViewModel {
     var onLoading: ((Bool) -> Void)?
     var onError: ((String) -> Void)?
     var onReloadData: (() -> Void)?
-    fileprivate(set) var isLoading: Bool
-    fileprivate(set) var currentPageIndex: UInt
-    fileprivate var searchKeyword: String
     fileprivate let searchArticlesService: SearchArticlesServiceApiProtocol
     fileprivate let searchArticlesKeywordDatabase: SearchArticlesKeywordDatabaseApiProtocol
+    fileprivate(set) var isLoading: Bool
+    fileprivate(set) var currentPageIndex: UInt
+    fileprivate(set) var searchKeyword: String
     fileprivate(set) var articleViewModels: [SearchArticlesResultsCellViewModelProtocol]
     
     init(searchArticlesService: SearchArticlesServiceApiProtocol,
@@ -30,7 +40,11 @@ final class SearchArticlesResultsViewModel {
         self.searchKeyword = ""
         self.articleViewModels = []
     }
-    
+}
+
+// MARK: - SearchArticlesResultsViewModelProtocol
+
+extension SearchArticlesResultsViewModel: SearchArticlesResultsViewModelProtocol {
     func search(keyword: String) {
         searchKeyword = keyword
         onLoading?(true)
@@ -61,7 +75,7 @@ final class SearchArticlesResultsViewModel {
     }
 }
 
-// MARK : - Pageable
+// MARK: - Pageable
 
 extension SearchArticlesResultsViewModel: Pageable {
     func refresh() {
@@ -73,7 +87,7 @@ extension SearchArticlesResultsViewModel: Pageable {
     }
 }
 
-// MARK : - Privates
+// MARK: - Privates
 
 extension SearchArticlesResultsViewModel {
     fileprivate func retrieveArticles(pageIndex: UInt) {

@@ -6,7 +6,7 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
-final class ArticleAggregateTableViewCellViewModel: ArticleDetailItemViewModelProtocol {
+final class ArticleAggregateTableViewCellViewModel {
     let content: Content
     
     init(content: Content) {

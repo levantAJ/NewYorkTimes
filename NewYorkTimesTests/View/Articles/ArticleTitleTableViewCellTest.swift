@@ -17,8 +17,8 @@ class ArticleTitleTableViewCellTest: XCTestCase {
     override func setUp() {
         super.setUp()
         viewModel = ArticleTitleTableViewCellViewModelMock()
-        let bundel = Bundle(for: ArticleTitleTableViewCell.self)
-        sut = bundel.loadNibNamed("ArticleTitleTableViewCell", owner: nil)!.first as! ArticleTitleTableViewCell
+        let bundle = Bundle(for: ArticleTitleTableViewCell.self)
+        sut = bundle.loadNibNamed("ArticleTitleTableViewCell", owner: nil)!.first as! ArticleTitleTableViewCell
     }
     
     func testSetViewModel() {

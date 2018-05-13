@@ -15,11 +15,16 @@ final class ContentCollectionViewCellViewModelMock {
     var date = "date"
     var snippet = "snippet"
     var id = "id"
+    var mockedContent: Content!
 }
 
 // MARK: - ContentCollectionViewCellProtocol
 
 extension ContentCollectionViewCellViewModelMock: ContentCollectionViewCellProtocol {
+    var content: Content {
+        return mockedContent
+    }
+    
     func loadImage(completion: @escaping (String, Response<(UIImage)>) -> Void) {
         self.completion = completion
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ArticleTitleTableViewCellProtocol {
+protocol ArticleTitleTableViewCellProtocol: ArticleDetailItemViewModelProtocol {
     var title: String { get }
 }
 

@@ -21,7 +21,25 @@
 		3321257020A6F4330014A56F /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321256F20A6F4330014A56F /* ArticlesViewController.swift */; };
 		3321257320A6F4700014A56F /* ArticlesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321257220A6F4700014A56F /* ArticlesViewModel.swift */; };
 		3321257720A6F9FA0014A56F /* ArticleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3321257620A6F9FA0014A56F /* ArticleDetailViewController.swift */; };
+		3322AD5820A84E0000A70005 /* SearchArticlesServiceApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3322AD5720A84E0000A70005 /* SearchArticlesServiceApiTest.swift */; };
+		332C7DAA20A8538800EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DA920A8538800EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift */; };
+		332C7DAC20A8541B00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DAB20A8541B00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelTest.swift */; };
+		332C7DAE20A8564300EC8B31 /* SearchArticlesResultsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DAD20A8564300EC8B31 /* SearchArticlesResultsViewModelTest.swift */; };
+		332C7DB020A8569200EC8B31 /* SearchArticlesServiceApiMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DAF20A8569200EC8B31 /* SearchArticlesServiceApiMock.swift */; };
+		332C7DB220A8570A00EC8B31 /* SearchArticlesKeywordDatabaseApiMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DB120A8570A00EC8B31 /* SearchArticlesKeywordDatabaseApiMock.swift */; };
+		332C7DB720A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DB620A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift */; };
+		332C7DB920A862EB00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DB820A862EB00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelMock.swift */; };
+		332C7DBB20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DBA20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift */; };
+		332C7DBD20A864E100EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332C7DBC20A864E100EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift */; };
 		33457EFF20A5FE7F00F3647A /* MultimediaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33457EFE20A5FE7F00F3647A /* MultimediaTest.swift */; };
+		336A298620A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298520A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift */; };
+		336A298820A8723700E310D1 /* SearchArticlesResultsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298720A8723700E310D1 /* SearchArticlesResultsViewModelMock.swift */; };
+		336A298A20A88A6000E310D1 /* UICollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298920A88A6000E310D1 /* UICollectionViewMock.swift */; };
+		336A298C20A8921E00E310D1 /* ArticleDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298B20A8921E00E310D1 /* ArticleDetailViewControllerTest.swift */; };
+		336A298E20A8933100E310D1 /* ArticleDetailViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298D20A8933100E310D1 /* ArticleDetailViewModelMock.swift */; };
+		336A299020A8975B00E310D1 /* UITableViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298F20A8975B00E310D1 /* UITableViewMock.swift */; };
+		336A299220A89AAC00E310D1 /* HomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299120A89AAC00E310D1 /* HomeViewControllerTest.swift */; };
+		336A299420A89BE100E310D1 /* HomeViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299320A89BE100E310D1 /* HomeViewModelMock.swift */; };
 		337675F820A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675F720A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift */; };
 		337675FA20A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675F920A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift */; };
 		337675FC20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675FB20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift */; };
@@ -145,7 +163,25 @@
 		3321256F20A6F4330014A56F /* ArticlesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		3321257220A6F4700014A56F /* ArticlesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewModel.swift; sourceTree = "<group>"; };
 		3321257620A6F9FA0014A56F /* ArticleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewController.swift; sourceTree = "<group>"; };
+		3322AD5720A84E0000A70005 /* SearchArticlesServiceApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesServiceApiTest.swift; sourceTree = "<group>"; };
+		332C7DA920A8538800EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift; sourceTree = "<group>"; };
+		332C7DAB20A8541B00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsCollectionViewCellViewModelTest.swift; sourceTree = "<group>"; };
+		332C7DAD20A8564300EC8B31 /* SearchArticlesResultsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsViewModelTest.swift; sourceTree = "<group>"; };
+		332C7DAF20A8569200EC8B31 /* SearchArticlesServiceApiMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesServiceApiMock.swift; sourceTree = "<group>"; };
+		332C7DB120A8570A00EC8B31 /* SearchArticlesKeywordDatabaseApiMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordDatabaseApiMock.swift; sourceTree = "<group>"; };
+		332C7DB620A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsCollectionViewCellTest.swift; sourceTree = "<group>"; };
+		332C7DB820A862EB00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsCollectionViewCellViewModelMock.swift; sourceTree = "<group>"; };
+		332C7DBA20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordResultsCollectionViewCellTest.swift; sourceTree = "<group>"; };
+		332C7DBC20A864E100EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift; sourceTree = "<group>"; };
 		33457EFE20A5FE7F00F3647A /* MultimediaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultimediaTest.swift; sourceTree = "<group>"; };
+		336A298520A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsViewControllerTest.swift; sourceTree = "<group>"; };
+		336A298720A8723700E310D1 /* SearchArticlesResultsViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsViewModelMock.swift; sourceTree = "<group>"; };
+		336A298920A88A6000E310D1 /* UICollectionViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewMock.swift; sourceTree = "<group>"; };
+		336A298B20A8921E00E310D1 /* ArticleDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewControllerTest.swift; sourceTree = "<group>"; };
+		336A298D20A8933100E310D1 /* ArticleDetailViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewModelMock.swift; sourceTree = "<group>"; };
+		336A298F20A8975B00E310D1 /* UITableViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewMock.swift; sourceTree = "<group>"; };
+		336A299120A89AAC00E310D1 /* HomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTest.swift; sourceTree = "<group>"; };
+		336A299320A89BE100E310D1 /* HomeViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelMock.swift; sourceTree = "<group>"; };
 		337675F720A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAggregateTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
 		337675F920A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
 		337675FB20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSnippetTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
@@ -317,11 +353,32 @@
 			path = Articles;
 			sourceTree = "<group>";
 		};
+		332C7DA820A8537600EC8B31 /* SearchArticles */ = {
+			isa = PBXGroup;
+			children = (
+				332C7DAD20A8564300EC8B31 /* SearchArticlesResultsViewModelTest.swift */,
+				332C7DA920A8538800EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift */,
+				332C7DAB20A8541B00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelTest.swift */,
+			);
+			path = SearchArticles;
+			sourceTree = "<group>";
+		};
+		332C7DB320A8627100EC8B31 /* SearchArticles */ = {
+			isa = PBXGroup;
+			children = (
+				336A298520A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift */,
+				332C7DB620A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift */,
+				332C7DBA20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift */,
+			);
+			path = SearchArticles;
+			sourceTree = "<group>";
+		};
 		337675F520A73326008D7129 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				339C351820A74C1C0061B054 /* Home */,
 				339C351D20A7510B0061B054 /* Articles */,
+				332C7DB320A8627100EC8B31 /* SearchArticles */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -359,6 +416,7 @@
 		339C351820A74C1C0061B054 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				336A299120A89AAC00E310D1 /* HomeViewControllerTest.swift */,
 				339C351920A74CAB0061B054 /* ContentCollectionViewCellTest.swift */,
 			);
 			path = Home;
@@ -368,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				3315D98920A7556400491E39 /* ArticlesViewControllerTest.swift */,
+				336A298B20A8921E00E310D1 /* ArticleDetailViewControllerTest.swift */,
 				339C351E20A751300061B054 /* ArticleTitleTableViewCellTest.swift */,
 				339C352220A752320061B054 /* ArticleAggregateTableViewCellTest.swift */,
 				339C352620A7531D0061B054 /* ArticleSnippetTableViewCellTest.swift */,
@@ -417,6 +476,7 @@
 			children = (
 				33EBB37320A69B8E004DCC56 /* Home */,
 				337675F620A7336F008D7129 /* Articles */,
+				332C7DA820A8537600EC8B31 /* SearchArticles */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -609,10 +669,11 @@
 			isa = PBXGroup;
 			children = (
 				33F6716420A5C7B8000C7BB5 /* APITest.swift */,
+				33A8706520A72E21007BC90A /* APIErrorTest.swift */,
 				33F8364920A66A4C0044F253 /* RequestServiceTest.swift */,
 				33F4238820A6DDB20028CC7B /* DownloadImageServiceTest.swift */,
 				33095FE420A68556009EA401 /* ContentServiceApiTest.swift */,
-				33A8706520A72E21007BC90A /* APIErrorTest.swift */,
+				3322AD5720A84E0000A70005 /* SearchArticlesServiceApiTest.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -649,6 +710,8 @@
 		33F8364B20A66A7B0044F253 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				336A298920A88A6000E310D1 /* UICollectionViewMock.swift */,
+				336A298F20A8975B00E310D1 /* UITableViewMock.swift */,
 				33F8364C20A66A910044F253 /* URLSessionMock.swift */,
 				33F8364E20A66CF40044F253 /* MappableObjectAMock.swift */,
 				33F8365020A66D0A0044F253 /* MappableObjectBMock.swift */,
@@ -662,6 +725,13 @@
 				339C352C20A754000061B054 /* ArticleImageTableViewCellViewModelMock.swift */,
 				3315D98B20A757BC00491E39 /* ArticlesViewModelMock.swift */,
 				33C36C4520A84362009B8BA2 /* UserDefaultsMock.swift */,
+				332C7DAF20A8569200EC8B31 /* SearchArticlesServiceApiMock.swift */,
+				332C7DB120A8570A00EC8B31 /* SearchArticlesKeywordDatabaseApiMock.swift */,
+				332C7DB820A862EB00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelMock.swift */,
+				332C7DBC20A864E100EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift */,
+				336A298720A8723700E310D1 /* SearchArticlesResultsViewModelMock.swift */,
+				336A298D20A8933100E310D1 /* ArticleDetailViewModelMock.swift */,
+				336A299320A89BE100E310D1 /* HomeViewModelMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -889,8 +959,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				336A298820A8723700E310D1 /* SearchArticlesResultsViewModelMock.swift in Sources */,
 				33F8364D20A66A910044F253 /* URLSessionMock.swift in Sources */,
+				332C7DB920A862EB00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelMock.swift in Sources */,
 				339C352520A752560061B054 /* ArticleAggregateTableViewCellViewModelMock.swift in Sources */,
+				332C7DBD20A864E100EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelMock.swift in Sources */,
 				33A8706620A72E21007BC90A /* APIErrorTest.swift in Sources */,
 				339C352B20A753BD0061B054 /* ArticleImageTableViewCellTest.swift in Sources */,
 				33F8365120A66D0A0044F253 /* MappableObjectBMock.swift in Sources */,
@@ -902,33 +975,48 @@
 				3300CAC620A73F2E00EA70FC /* ArticlesViewModelTest.swift in Sources */,
 				33F6717220A5DB27000C7BB5 /* MappingTest.swift in Sources */,
 				339C352920A753560061B054 /* ArticleSnippetTableViewCellViewModelMock.swift in Sources */,
+				336A298620A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift in Sources */,
 				339C352720A7531D0061B054 /* ArticleSnippetTableViewCellTest.swift in Sources */,
+				332C7DBB20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift in Sources */,
 				33EBB37720A69BF6004DCC56 /* ContentServiceApiMock.swift in Sources */,
+				332C7DAA20A8538800EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellViewModelTest.swift in Sources */,
 				33095FE520A68556009EA401 /* ContentServiceApiTest.swift in Sources */,
+				336A299220A89AAC00E310D1 /* HomeViewControllerTest.swift in Sources */,
 				339C351F20A751300061B054 /* ArticleTitleTableViewCellTest.swift in Sources */,
 				33EBB37520A69BA0004DCC56 /* HomeViewModelTest.swift in Sources */,
 				337675F820A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift in Sources */,
+				336A298A20A88A6000E310D1 /* UICollectionViewMock.swift in Sources */,
+				332C7DB720A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift in Sources */,
 				337675FA20A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift in Sources */,
 				3396CF3F20A7436A00055572 /* ContentCollectionViewCellViewModelTest.swift in Sources */,
 				33F6716520A5C7B8000C7BB5 /* APITest.swift in Sources */,
 				33C36C4A20A84B64009B8BA2 /* SearchArticlesResponseTest.swift in Sources */,
 				339C351C20A74E220061B054 /* ContentCollectionViewCellViewModelMock.swift in Sources */,
 				33F4238920A6DDB20028CC7B /* DownloadImageServiceTest.swift in Sources */,
+				336A298E20A8933100E310D1 /* ArticleDetailViewModelMock.swift in Sources */,
+				332C7DAE20A8564300EC8B31 /* SearchArticlesResultsViewModelTest.swift in Sources */,
+				336A299020A8975B00E310D1 /* UITableViewMock.swift in Sources */,
 				33457EFF20A5FE7F00F3647A /* MultimediaTest.swift in Sources */,
 				33B5832620A5EAA300C5196B /* ContentTest.swift in Sources */,
+				336A299420A89BE100E310D1 /* HomeViewModelMock.swift in Sources */,
 				339C351A20A74CAB0061B054 /* ContentCollectionViewCellTest.swift in Sources */,
+				332C7DB220A8570A00EC8B31 /* SearchArticlesKeywordDatabaseApiMock.swift in Sources */,
 				339C352D20A754000061B054 /* ArticleImageTableViewCellViewModelMock.swift in Sources */,
 				3376760220A73C78008D7129 /* ArticleDetailViewModelTest.swift in Sources */,
 				337675FC20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift in Sources */,
 				33A8706420A72CEC007BC90A /* DateTest.swift in Sources */,
 				3315D98A20A7556400491E39 /* ArticlesViewControllerTest.swift in Sources */,
+				332C7DB020A8569200EC8B31 /* SearchArticlesServiceApiMock.swift in Sources */,
 				3376760020A73701008D7129 /* DownloadImageServiceMock.swift in Sources */,
 				339C352320A752320061B054 /* ArticleAggregateTableViewCellTest.swift in Sources */,
 				33F8364F20A66CF40044F253 /* MappableObjectAMock.swift in Sources */,
 				339C352120A751A50061B054 /* ArticleTitleTableViewCellViewModelMock.swift in Sources */,
+				332C7DAC20A8541B00EC8B31 /* SearchArticlesResultsCollectionViewCellViewModelTest.swift in Sources */,
 				33C36C4620A84362009B8BA2 /* UserDefaultsMock.swift in Sources */,
 				33C36C4820A84936009B8BA2 /* ArticleTest.swift in Sources */,
 				33095FE720A685B1009EA401 /* RequestServiceMock.swift in Sources */,
+				336A298C20A8921E00E310D1 /* ArticleDetailViewControllerTest.swift in Sources */,
+				3322AD5820A84E0000A70005 /* SearchArticlesServiceApiTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,7 +1120,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1086,7 +1174,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

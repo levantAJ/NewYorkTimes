@@ -23,3 +23,13 @@ extension Article: Mappable {
         webURL = map["web_url"]
     }
 }
+
+// MARK: - Equatable
+
+extension Article: Equatable {
+    static func == (lhs: Article, rhs: Article) -> Bool {
+        return lhs.snippet == rhs.snippet
+            && lhs.title == rhs.title
+            && lhs.webURL == rhs.webURL
+    }
+}

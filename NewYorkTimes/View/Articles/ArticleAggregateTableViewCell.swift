@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ArticleAggregateTableViewCellProtocol {
+protocol ArticleAggregateTableViewCellProtocol: ArticleDetailItemViewModelProtocol {
     var date: String { get }
     var byline: String { get }
     var source: String { get }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ArticleImageTableViewCellViewModel: ArticleDetailItemViewModelProtocol {
+final class ArticleImageTableViewCellViewModel {
     let multimedia: Multimedia
     fileprivate let downloadImageService: DownloadImageServiceProtocol
     

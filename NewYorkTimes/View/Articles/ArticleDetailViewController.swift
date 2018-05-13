@@ -11,9 +11,10 @@ import UIKit
 final class ArticleDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: ArticleDetailViewModel! {
+    var viewModel: ArticleDetailViewModelProtocol! {
         didSet {
-            tableView?.reloadData() //tableView might hasn't loaded yet
+            //tableView might hasn't loaded yet so treat it like an optional object
+            tableView?.reloadData()
         }
     }
     
@@ -32,22 +33,22 @@ extension ArticleDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let itemViewModel = viewModel.itemViewModel(at: indexPath.row)
-        if let itemViewModel = itemViewModel as? ArticleTitleTableViewCellViewModel {
+        if let itemViewModel = itemViewModel as? ArticleTitleTableViewCellProtocol {
             let cell = tableView.dequeueReusableCell(type: ArticleTitleTableViewCell.self, for: indexPath)
             cell.set(viewModel: itemViewModel)
             return cell
         }
-        if let itemViewModel = itemViewModel as? ArticleAggregateTableViewCellViewModel {
+        if let itemViewModel = itemViewModel as? ArticleAggregateTableViewCellProtocol {
             let cell = tableView.dequeueReusableCell(type: ArticleAggregateTableViewCell.self, for: indexPath)
             cell.set(viewModel: itemViewModel)
             return cell
         }
-        if let itemViewModel = itemViewModel as? ArticleSnippetTableViewCellViewModel {
+        if let itemViewModel = itemViewModel as? ArticleSnippetTableViewCellProtocol {
             let cell = tableView.dequeueReusableCell(type: ArticleSnippetTableViewCell.self, for: indexPath)
             cell.set(viewModel: itemViewModel)
             return cell
         }
-        if let itemViewModel = itemViewModel as? ArticleImageTableViewCellViewModel {
+        if let itemViewModel = itemViewModel as? ArticleImageTableViewCellProtocol {
             let cell = tableView.dequeueReusableCell(type: ArticleImageTableViewCell.self, for: indexPath)
             cell.set(viewModel: itemViewModel)
             return cell

@@ -1,61 +1,69 @@
 //
-//  ContentServiceApiTest.swift
+//  SearchArticlesServiceApiTest.swift
 //  NewYorkTimesTests
 //
-//  Created by levantAJ on 12/5/18.
+//  Created by levantAJ on 13/5/18.
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
 import XCTest
 @testable import NewYorkTimes
 
-class ContentServiceApiTest: XCTestCase {
+class SearchArticlesServiceApiTest: XCTestCase {
     
-    var sut: ContentServiceApi!
-    var request: RequestServiceMock<ContentResponse>!
+    var sut: SearchArticlesServiceApi!
+    var request: RequestServiceMock<SearchArticlesResponse>!
     
     override func setUp() {
         super.setUp()
         request = RequestServiceMock()
-        sut = ContentServiceApi(request: request)
+        sut = SearchArticlesServiceApi(request: request)
     }
-    
-    func testRequestSuccess() {
+}
+
+// MARK: - Test search method
+
+extension SearchArticlesServiceApiTest {
+    func testSearchSuccess() {
         //Given:
+        let query = "query"
+        let pageIndex = UInt(0)
         let successExpectation = expectation(description: #function + "success")
         let failureExpectation = expectation(description: #function + "failure")
         failureExpectation.isInverted = true
-        let expectedContent = Content()
-        let contentResponse = ContentResponse(status: .ok, contents: [expectedContent])
+        let article = Article(snippet: "snippet", title: "title", webURL: URL(string: "https://www.nytimes.com/1990/10/19/business/textron-posts-gain-in-profits.html"))
+        let expectedArticles = [article, article, article]
+        let response = SearchArticlesResponse(status: .ok, articles: expectedArticles)
         
         //When:
-        sut.request(pageIndex: 0, pageSize: 0) { response in
+        sut.search(query: query, pageIndex: pageIndex) { (response) in
             switch response {
-            case .success(let value):
-                XCTAssertEqual(value.count, 1)
-                if let content = value.first {
-                    XCTAssertEqual(expectedContent, content)
-                }
+            case .success(let articles):
+                XCTAssertEqual(articles, expectedArticles)
                 successExpectation.fulfill()
             case .failure:
                 failureExpectation.fulfill()
             }
         }
-        request.objectCompletion?(.success(contentResponse))
+        request.objectCompletion?(.success(response))
         
         //Then:
         wait(for: [successExpectation, failureExpectation], timeout: 0.1)
     }
     
-    func testRequestFailureCannotReachServer() {
+    func testSearchFailureBecauseCannotReachToTheServer() {
         //Given:
+        let query = "query"
+        let pageIndex = UInt(0)
         let successExpectation = expectation(description: #function + "success")
         successExpectation.isInverted = true
         let failureExpectation = expectation(description: #function + "failure")
-        let contentResponse = ContentResponse(status: .unknown, contents: [])
+        let article = Article(snippet: "snippet", title: "title", webURL: URL(string: "https://www.nytimes.com/1990/10/19/business/textron-posts-gain-in-profits.html"))
+        let expectedArticles = [article, article, article]
+        let response = SearchArticlesResponse(status: .unknown, articles: expectedArticles)
         
         //When:
-        sut.request(pageIndex: 0, pageSize: 0) { response in
+        sut.search(query: query, pageIndex: pageIndex) { (response) in
             switch response {
             case .success:
                 successExpectation.fulfill()
@@ -64,21 +72,23 @@ class ContentServiceApiTest: XCTestCase {
                 failureExpectation.fulfill()
             }
         }
-        request.objectCompletion?(.success(contentResponse))
+        request.objectCompletion?(.success(response))
         
         //Then:
         wait(for: [successExpectation, failureExpectation], timeout: 0.1)
     }
     
-    func testRequestFailure() {
+    func testSearchFailure() {
         //Given:
+        let query = "query"
+        let pageIndex = UInt(0)
         let successExpectation = expectation(description: #function + "success")
         successExpectation.isInverted = true
         let failureExpectation = expectation(description: #function + "failure")
         let expectedError = NSError(domain: "test-error", code: 0, userInfo: [:])
         
         //When:
-        sut.request(pageIndex: 0, pageSize: 0) { response in
+        sut.search(query: query, pageIndex: pageIndex) { (response) in
             switch response {
             case .success:
                 successExpectation.fulfill()

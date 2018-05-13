@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ArticleImageTableViewCellProtocol: ImageLoadable {
+protocol ArticleImageTableViewCellProtocol: ImageLoadable, ArticleDetailItemViewModelProtocol {
     var caption: String { get }
 }
 

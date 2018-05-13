@@ -17,8 +17,8 @@ class ContentCollectionViewCellTest: XCTestCase {
     override func setUp() {
         super.setUp()
         viewModel = ContentCollectionViewCellViewModelMock()
-        let bundel = Bundle(for: ContentCollectionViewCell.self)
-        sut = bundel.loadNibNamed("ContentCollectionViewCell", owner: nil)!.first as! ContentCollectionViewCell
+        let bundle = Bundle(for: ContentCollectionViewCell.self)
+        sut = bundle.loadNibNamed("ContentCollectionViewCell", owner: nil)!.first as! ContentCollectionViewCell
     }
     
     func testSetViewModelLoadImageSuccess() {

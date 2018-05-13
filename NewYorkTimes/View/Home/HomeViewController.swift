@@ -11,8 +11,8 @@ import UIKit
 final class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
+    var viewModel: HomeViewModelProtocol!
     fileprivate var refreshControl: UIRefreshControl!
-    fileprivate var viewModel: HomeViewModel!
     fileprivate var searchArticlesVC: SearchArticlesResultsViewController!
     fileprivate var searchController: UISearchController!
 
@@ -99,7 +99,6 @@ extension HomeViewController {
     }
     
     fileprivate func setupViewModel() {
-        viewModel = HomeViewModelFactory.create()
         viewModel.onReloadData = { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.refreshControl.endRefreshing()

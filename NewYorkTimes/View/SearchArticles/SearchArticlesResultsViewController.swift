@@ -13,7 +13,7 @@ final class SearchArticlesResultsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
-    var viewModel: SearchArticlesResultsViewModel!
+    var viewModel: SearchArticlesResultsViewModelProtocol!
     fileprivate var heightCalculatingCell: SearchArticlesResultsCollectionViewCell!
     
     required init?(coder aDecoder: NSCoder) {
@@ -61,12 +61,12 @@ extension SearchArticlesResultsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let articleViewModel = viewModel.articleViewModel(at: indexPath.item)
-        if let articleViewModel = articleViewModel as? SearchArticlesResultsCollectionViewCellViewModel {
+        if let articleViewModel = articleViewModel as? SearchArticlesResultsCollectionViewCellProtocol {
             let cell = collectionView.dequeueReusableCell(type: SearchArticlesResultsCollectionViewCell.self, for: indexPath)
             cell.set(viewModel: articleViewModel)
             return cell
         }
-        if let articleViewModel = articleViewModel as? SearchArticlesKeywordResultsCollectionViewCellViewModel {
+        if let articleViewModel = articleViewModel as? SearchArticlesKeywordResultsCollectionViewCellProtocol {
             let cell = collectionView.dequeueReusableCell(type: SearchArticlesKeywordResultsCollectionViewCell.self, for: indexPath)
             cell.set(viewModel: articleViewModel)
             return cell

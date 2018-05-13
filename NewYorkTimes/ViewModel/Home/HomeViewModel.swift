@@ -8,13 +8,22 @@
 
 import Foundation
 
+protocol HomeViewModelProtocol: Pageable {
+    var onError: ((String) -> Void)?  { get set }
+    var onReloadData: (() -> Void)?  { get set }
+    var onMoreData: (([ContentCollectionViewCellProtocol]) -> Void)? { get set }
+    var contentViewModels: [ContentCollectionViewCellProtocol] { get }
+    func contentViewModel(at index: Int) -> ContentCollectionViewCellProtocol?
+    func append(contentViewModel: ContentCollectionViewCellProtocol)
+}
+
 final class HomeViewModel {
     var onError: ((String) -> Void)?
     var onReloadData: (() -> Void)?
-    var onMoreData: (([ContentCollectionViewCellViewModel]) -> Void)?
+    var onMoreData: (([ContentCollectionViewCellProtocol]) -> Void)?
     fileprivate(set) var isLoading: Bool
     fileprivate(set) var currentPageIndex: UInt
-    fileprivate(set) var contentViewModels: [ContentCollectionViewCellViewModel]
+    fileprivate(set) var contentViewModels: [ContentCollectionViewCellProtocol]
     fileprivate let contentSerivce: ContentServiceApiProtocol
     fileprivate var downloadImageService: DownloadImageServiceProtocol
     
@@ -25,20 +34,24 @@ final class HomeViewModel {
         self.downloadImageService = DownloadImageService(session: URLSession.shared)
         self.isLoading = false
     }
-    
-    func contentViewModel(at index: Int) -> ContentCollectionViewCellViewModel? {
+}
+
+// MARK: - HomeViewModel
+
+extension HomeViewModel: HomeViewModelProtocol {
+    func contentViewModel(at index: Int) -> ContentCollectionViewCellProtocol? {
         if index < contentViewModels.count && index >= 0 {
             return contentViewModels[index]
         }
         return nil
     }
     
-    func append(contentViewModel: ContentCollectionViewCellViewModel) {
+    func append(contentViewModel: ContentCollectionViewCellProtocol) {
         contentViewModels.append(contentViewModel)
     }
 }
 
-// MARK : - Pageable
+// MARK: - Pageable
 
 extension HomeViewModel: Pageable {
     func refresh() {
@@ -50,7 +63,7 @@ extension HomeViewModel: Pageable {
     }
 }
 
-// MARK : - Privates
+// MARK: - Privates
 
 extension HomeViewModel {
     fileprivate func retrieveContents(pageIndex: UInt) {

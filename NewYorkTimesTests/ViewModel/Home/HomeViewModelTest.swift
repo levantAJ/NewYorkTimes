@@ -23,6 +23,46 @@ class HomeViewModelTest: XCTestCase {
         sut = HomeViewModel(contentSerivce: contentSerivce)
     }
     
+    func testContentViewModel() {
+        XCTAssertNil(sut.contentViewModel(at: 0))
+        
+        //Given:
+        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
+        sut.append(contentViewModel: viewModel)
+        sut.append(contentViewModel: viewModel)
+        sut.append(contentViewModel: viewModel)
+        
+        //When:
+        let viewModel0 = sut.contentViewModel(at: -1)
+        let viewModel1 = sut.contentViewModel(at: 0)
+        let viewModel2 = sut.contentViewModel(at: 1)
+        let viewModel3 = sut.contentViewModel(at: 2)
+        let viewModel4 = sut.contentViewModel(at: 3)
+        
+        //Then:
+        XCTAssertNil(viewModel0)
+        XCTAssertNotNil(viewModel1)
+        XCTAssertNotNil(viewModel2)
+        XCTAssertNotNil(viewModel3)
+        XCTAssertNil(viewModel4)
+    }
+    
+    func testAppendContentViewModel() {
+        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 1)
+        
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 2)
+        
+        sut.append(contentViewModel: viewModel)
+        XCTAssertEqual(sut.contentViewModels.count, 3)
+    }
+}
+
+// MARK: - Test refresh method
+
+extension HomeViewModelTest {
     func testRefreshSuccess() {
         //Given:
         let content = mockedContent()
@@ -91,7 +131,11 @@ class HomeViewModelTest: XCTestCase {
         XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
         wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
     }
-    
+}
+
+// MARK: - Test loadMore method
+
+extension HomeViewModelTest {
     func testLoadMoreSuccess() {
         //Given:
         let content = mockedContent()
@@ -159,42 +203,6 @@ class HomeViewModelTest: XCTestCase {
         XCTAssertEqual(contentSerivce.pageIndex, 1)
         XCTAssertEqual(contentSerivce.pageSize, Constant.API.PageSize)
         wait(for: [reloadDataExpectation, erroredExpectation, moreDataExpectation], timeout: 0.1)
-    }
-    
-    func testContentViewModel() {
-        XCTAssertNil(sut.contentViewModel(at: 0))
-        
-        //Given:
-        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
-        sut.append(contentViewModel: viewModel)
-        sut.append(contentViewModel: viewModel)
-        sut.append(contentViewModel: viewModel)
-        
-        //When:
-        let viewModel0 = sut.contentViewModel(at: -1)
-        let viewModel1 = sut.contentViewModel(at: 0)
-        let viewModel2 = sut.contentViewModel(at: 1)
-        let viewModel3 = sut.contentViewModel(at: 2)
-        let viewModel4 = sut.contentViewModel(at: 3)
-        
-        //Then:
-        XCTAssertNil(viewModel0)
-        XCTAssertNotNil(viewModel1)
-        XCTAssertNotNil(viewModel2)
-        XCTAssertNotNil(viewModel3)
-        XCTAssertNil(viewModel4)
-    }
-    
-    func testAppendContentViewModel() {
-        let viewModel = ContentCollectionViewCellViewModel(content: mockedContent(), downloadImageService: downloadImageService)
-        sut.append(contentViewModel: viewModel)
-        XCTAssertEqual(sut.contentViewModels.count, 1)
-        
-        sut.append(contentViewModel: viewModel)
-        XCTAssertEqual(sut.contentViewModels.count, 2)
-        
-        sut.append(contentViewModel: viewModel)
-        XCTAssertEqual(sut.contentViewModels.count, 3)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ArticleSnippetTableViewCellProtocol {
+protocol ArticleSnippetTableViewCellProtocol: ArticleDetailItemViewModelProtocol {
     var snippet: String { get }
 }
 
