@@ -96,7 +96,7 @@ class HomeViewControllerTest: XCTestCase {
         sut.refreshControlValueChanged()
         
         //Then:
-        XCTAssertTrue(viewModel.didLoadMore)
+        XCTAssertTrue(viewModel.didRefresh)
     }
 }
 
