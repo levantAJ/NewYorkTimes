@@ -155,6 +155,23 @@ class SearchArticlesResultsViewControllerTest: XCTestCase {
         //Then:
         XCTAssertEqual(articleViewModelAtIndex.cachedSize, size)
     }
+    
+    func testCollectionViewDidSelectItemAtIndex() {
+        //Given:
+        let articleViewModelAtIndex = SearchArticlesKeywordResultsCollectionViewCellViewModelMock()
+        let keyword = "Hello world"
+        articleViewModelAtIndex.title = keyword
+        viewModel.articleViewModelAtIndex = articleViewModelAtIndex
+        let searchBar = UISearchBar()
+        sut.searchBar = searchBar
+        
+        //When:
+        sut.collectionView(mockedCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+        
+        //Then:
+        XCTAssertEqual(searchBar.text, keyword)
+        XCTAssertEqual(viewModel.searchKeyword, keyword)
+    }
 
 }
 
