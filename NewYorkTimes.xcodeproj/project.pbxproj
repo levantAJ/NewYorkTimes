@@ -40,6 +40,8 @@
 		336A299020A8975B00E310D1 /* UITableViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A298F20A8975B00E310D1 /* UITableViewMock.swift */; };
 		336A299220A89AAC00E310D1 /* HomeViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299120A89AAC00E310D1 /* HomeViewControllerTest.swift */; };
 		336A299420A89BE100E310D1 /* HomeViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299320A89BE100E310D1 /* HomeViewModelMock.swift */; };
+		336A299B20A8AC4500E310D1 /* ArticlesViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299A20A8AC4500E310D1 /* ArticlesViewControllerTest.swift */; };
+		336A299E20A8AD4000E310D1 /* SearchArticlesResultsViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336A299D20A8AD4000E310D1 /* SearchArticlesResultsViewControllerTest.swift */; };
 		337675F820A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675F720A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift */; };
 		337675FA20A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675F920A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift */; };
 		337675FC20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337675FB20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift */; };
@@ -182,6 +184,8 @@
 		336A298F20A8975B00E310D1 /* UITableViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewMock.swift; sourceTree = "<group>"; };
 		336A299120A89AAC00E310D1 /* HomeViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerTest.swift; sourceTree = "<group>"; };
 		336A299320A89BE100E310D1 /* HomeViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelMock.swift; sourceTree = "<group>"; };
+		336A299A20A8AC4500E310D1 /* ArticlesViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesViewControllerTest.swift; sourceTree = "<group>"; };
+		336A299D20A8AD4000E310D1 /* SearchArticlesResultsViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArticlesResultsViewControllerTest.swift; sourceTree = "<group>"; };
 		337675F720A73380008D7129 /* ArticleAggregateTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAggregateTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
 		337675F920A735B4008D7129 /* ArticleTitleTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
 		337675FB20A7361A008D7129 /* ArticleSnippetTableViewCellViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleSnippetTableViewCellViewModelTest.swift; sourceTree = "<group>"; };
@@ -369,6 +373,22 @@
 				336A298520A8711000E310D1 /* SearchArticlesResultsViewControllerTest.swift */,
 				332C7DB620A862BB00EC8B31 /* SearchArticlesResultsCollectionViewCellTest.swift */,
 				332C7DBA20A864B600EC8B31 /* SearchArticlesKeywordResultsCollectionViewCellTest.swift */,
+			);
+			path = SearchArticles;
+			sourceTree = "<group>";
+		};
+		336A299920A8AC2A00E310D1 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				336A299A20A8AC4500E310D1 /* ArticlesViewControllerTest.swift */,
+			);
+			path = Articles;
+			sourceTree = "<group>";
+		};
+		336A299C20A8AD2D00E310D1 /* SearchArticles */ = {
+			isa = PBXGroup;
+			children = (
+				336A299D20A8AD4000E310D1 /* SearchArticlesResultsViewControllerTest.swift */,
 			);
 			path = SearchArticles;
 			sourceTree = "<group>";
@@ -563,6 +583,8 @@
 			isa = PBXGroup;
 			children = (
 				33D57A6B20A6E3FC00553902 /* Home */,
+				336A299920A8AC2A00E310D1 /* Articles */,
+				336A299C20A8AD2D00E310D1 /* SearchArticles */,
 				33F6714720A5BE2D000C7BB5 /* Info.plist */,
 			);
 			path = NewYorkTimesUITests;
@@ -1024,6 +1046,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				336A299E20A8AD4000E310D1 /* SearchArticlesResultsViewControllerTest.swift in Sources */,
+				336A299B20A8AC4500E310D1 /* ArticlesViewControllerTest.swift in Sources */,
 				33D57A6D20A6E41800553902 /* HomeViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

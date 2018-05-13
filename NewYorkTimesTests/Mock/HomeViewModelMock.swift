@@ -16,6 +16,7 @@ final class HomeViewModelMock {
     var isLoading = false
     var currentPageIndex = UInt(0)
     var didLoadMore = false
+    var didRefresh = false
 }
 
 // MARK: - HomeViewModelProtocol
@@ -30,7 +31,7 @@ extension HomeViewModelMock: HomeViewModelProtocol {
     }
     
     func refresh() {
-        
+        didRefresh = true
     }
     
     func loadMore() {

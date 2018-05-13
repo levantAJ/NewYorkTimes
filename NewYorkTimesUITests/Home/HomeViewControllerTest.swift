@@ -9,6 +9,7 @@
 import XCTest
 
 class HomeViewControllerTest: XCTestCase {
+    let app = XCUIApplication()
         
     override func setUp() {
         super.setUp()
@@ -16,7 +17,15 @@ class HomeViewControllerTest: XCTestCase {
         XCUIApplication().launch()
     }
     
-    func testExample() {
-    }
+    func testListOfContents() {
+        let searchBar = app.searchFields["Search Articles"]
+        XCTAssertTrue(searchBar.exists)
+        
+        sleep(5) //Waiting for network
+        let cell = app.collectionViews.children(matching: .cell).element(boundBy: 0)
+        XCTAssertTrue(cell.exists)
     
+        let image = cell.children(matching: .other).element.children(matching: .other).element
+        image.swipeUp()
+    }
 }

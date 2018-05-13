@@ -90,6 +90,14 @@ class HomeViewControllerTest: XCTestCase {
         //Then:
         XCTAssertFalse(viewModel.didLoadMore)
     }
+    
+    func testRefreshControlValueChanged() {
+        //When:
+        sut.refreshControlValueChanged()
+        
+        //Then:
+        XCTAssertTrue(viewModel.didLoadMore)
+    }
 }
 
 // MARK: - Privates
