@@ -6,7 +6,7 @@
 //  Copyright © 2018 levantAJ. All rights reserved.
 //
 
-final class ArticleTitleTableViewCellViewModel {
+final class ArticleTitleTableViewCellViewModel: ArticleDetailItemViewModelProtocol {
     let content: Content
     
     init(content: Content) {

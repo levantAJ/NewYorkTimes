@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ArticleSnippetTableViewCellViewModel {
+final class ArticleSnippetTableViewCellViewModel: ArticleDetailItemViewModelProtocol {
     let content: Content
     
     init(content: Content) {

@@ -9,6 +9,7 @@
 import Foundation
 
 struct Article {
+    var id: String?
     var snippet: String?
     var title: String?
     var webURL: URL?
@@ -21,5 +22,6 @@ extension Article: Mappable {
         snippet = map["snippet"]
         title = map["headline.main"]
         webURL = map["web_url"]
+        id = map["_id"]
     }
 }

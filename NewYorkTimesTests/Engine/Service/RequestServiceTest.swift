@@ -38,7 +38,7 @@ class RequestServiceTest: XCTestCase {
                 XCTAssertNotNil(value)
                 XCTAssertEqual(value.object?.string, "string1")
                 XCTAssertEqual(value.array?.count, 3)
-                if (value.array?.count == 3) {
+                if value.array?.count == 3 {
                     XCTAssertEqual(value.array?[0].string, "string2")
                     XCTAssertEqual(value.array?[1].string, "string3")
                     XCTAssertEqual(value.array?[2].string, "string4")
@@ -145,10 +145,10 @@ class RequestServiceTest: XCTestCase {
             switch response {
             case .success(let value):
                 XCTAssertEqual(value.count, 1)
-                if (value.count == 1) {
+                if value.count == 1 {
                     XCTAssertEqual(value[0].object?.string, "string1")
                     XCTAssertEqual(value[0].array?.count, 3)
-                    if (value[0].array?.count == 3) {
+                    if value[0].array?.count == 3 {
                         XCTAssertEqual(value[0].array?[0].string, "string2")
                         XCTAssertEqual(value[0].array?[1].string, "string3")
                         XCTAssertEqual(value[0].array?[2].string, "string4")
@@ -178,7 +178,7 @@ class RequestServiceTest: XCTestCase {
             switch response {
             case .success(let value):
                 XCTAssertEqual(value.count, 1)
-                if (value.count == 1) {
+                if value.count == 1 {
                     XCTAssertNil(value[0].object)
                     XCTAssertNil(value[0].array)
                 }

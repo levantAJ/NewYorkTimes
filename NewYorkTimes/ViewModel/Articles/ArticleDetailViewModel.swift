@@ -8,17 +8,19 @@
 
 import Foundation
 
+protocol ArticleDetailItemViewModelProtocol {}
+
 final class ArticleDetailViewModel {
     let index: Int
     let content: Content
-    let itemViewModels: [Any]
+    let itemViewModels: [ArticleDetailItemViewModelProtocol]
     let downloadImageService: DownloadImageService
     
     init(content: Content, index: Int) {
         self.content = content
         self.index = index
         self.downloadImageService = DownloadImageService(session: URLSession.shared)
-        var viewModels: [Any] = [
+        var viewModels: [ArticleDetailItemViewModelProtocol] = [
             ArticleTitleTableViewCellViewModel(content: content),
             ArticleAggregateTableViewCellViewModel(content: content),
             ArticleSnippetTableViewCellViewModel(content: content),

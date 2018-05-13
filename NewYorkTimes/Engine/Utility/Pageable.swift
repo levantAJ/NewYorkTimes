@@ -7,6 +7,8 @@
 //
 
 protocol Pageable {
+    var isLoading: Bool { get }
+    var currentPageIndex: UInt { get }
     func refresh()
     func loadMore()
 }

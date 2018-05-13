@@ -16,6 +16,6 @@ struct SearchArticlesResponse {
 extension SearchArticlesResponse: Mappable {
     mutating func mapping(map: Mapping) {
         status = map["status"] ?? .unknown
-        articles = map["response.doc"]
+        articles = map["response.docs"]
     }
 }

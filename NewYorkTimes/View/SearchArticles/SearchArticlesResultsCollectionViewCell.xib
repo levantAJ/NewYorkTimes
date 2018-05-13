@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SearchArticlesResultsCollectionViewCell" customModule="NewYorkTimes" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="62"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="410" height="62"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfo-QN-M5B" userLabel="Title Label">
+                        <rect key="frame" x="16" y="8" width="378" height="41.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfy-lc-1Fv" userLabel="Snippet Label">
+                        <rect key="frame" x="16" y="53.5" width="378" height="0.0"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qks-B5-MZn" userLabel="Line View">
+                        <rect key="frame" x="0.0" y="61.5" width="410" height="0.5"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="aYy-ZL-xIW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="qks-B5-MZn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="2Br-vi-tlp"/>
+                <constraint firstAttribute="trailing" secondItem="qks-B5-MZn" secondAttribute="trailing" id="CIX-f8-4Wd"/>
+                <constraint firstAttribute="trailing" secondItem="kfo-QN-M5B" secondAttribute="trailing" constant="16" id="GGd-A7-3GQ"/>
+                <constraint firstItem="Lfy-lc-1Fv" firstAttribute="top" secondItem="kfo-QN-M5B" secondAttribute="bottom" constant="4" id="Lku-Qn-dlx"/>
+                <constraint firstItem="kfo-QN-M5B" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Mrm-Cz-ch2"/>
+                <constraint firstItem="Lfy-lc-1Fv" firstAttribute="leading" secondItem="kfo-QN-M5B" secondAttribute="leading" id="Pdq-pl-itj"/>
+                <constraint firstAttribute="bottom" secondItem="qks-B5-MZn" secondAttribute="bottom" id="WgB-SA-eU0"/>
+                <constraint firstItem="Lfy-lc-1Fv" firstAttribute="trailing" secondItem="kfo-QN-M5B" secondAttribute="trailing" id="iSt-pz-7F1"/>
+                <constraint firstItem="qks-B5-MZn" firstAttribute="top" secondItem="Lfy-lc-1Fv" secondAttribute="bottom" constant="8" id="ryU-be-jfm"/>
+                <constraint firstItem="kfo-QN-M5B" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="yRM-cq-Bsv"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="410" height="62"/>
+            <connections>
+                <outlet property="snippetLabel" destination="Lfy-lc-1Fv" id="GSY-dG-6CX"/>
+                <outlet property="titleLabel" destination="kfo-QN-M5B" id="E5m-cz-0kb"/>
+            </connections>
+            <point key="canvasLocation" x="-115" y="103"/>
+        </collectionViewCell>
+    </objects>
+</document>

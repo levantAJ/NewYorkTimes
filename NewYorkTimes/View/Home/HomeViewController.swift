@@ -52,11 +52,11 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.bounds.width, height: 500)
+        return CGSize(width: view.bounds.width, height: 500)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
+        if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height) {
             viewModel.loadMore()
         }
     }
@@ -93,6 +93,7 @@ extension HomeViewController {
         searchController.searchResultsUpdater = searchArticlesVC
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = NSLocalizedString("Search Articles", comment: "")
+        searchController.searchBar.delegate = searchArticlesVC
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }

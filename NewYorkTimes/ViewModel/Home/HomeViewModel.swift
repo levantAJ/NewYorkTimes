@@ -12,11 +12,10 @@ final class HomeViewModel {
     var onError: ((String) -> Void)?
     var onReloadData: (() -> Void)?
     var onMoreData: (([ContentCollectionViewCellViewModel]) -> Void)?
-    
-    fileprivate(set) var contentViewModels: [ContentCollectionViewCellViewModel]
     fileprivate(set) var isLoading: Bool
+    fileprivate(set) var currentPageIndex: UInt
+    fileprivate(set) var contentViewModels: [ContentCollectionViewCellViewModel]
     fileprivate let contentSerivce: ContentServiceApiProtocol
-    fileprivate var currentPageIndex: UInt
     fileprivate var downloadImageService: DownloadImageServiceProtocol
     
     init(contentSerivce: ContentServiceApiProtocol) {
@@ -64,7 +63,7 @@ extension HomeViewModel {
             switch response {
             case .success(let contents):
                 let contentViewModels = contents.map { ContentCollectionViewCellViewModel(content: $0, downloadImageService: strongSelf.downloadImageService) }
-                if (strongSelf.currentPageIndex == Constant.API.DefaultPageIndex) {
+                if strongSelf.currentPageIndex == Constant.API.DefaultPageIndex {
                     strongSelf.contentViewModels = contentViewModels
                     DispatchQueue.main.async {
                         strongSelf.onReloadData?()

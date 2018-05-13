@@ -61,7 +61,7 @@ extension Constant {
     struct API {
         static let DefaultPageIndex: UInt = 0
         static let PageSize: UInt = 10
-        static let NewYorkTimesKey = "180e7895aa4045f5bdf78389e0cd3ec2"
+        static let NewYorkTimesKey = "1ad94b9c1e9b40189604b1192b05c86f"
         static let Scheme = "https"
         static let Host = "api.nytimes.com"
     }

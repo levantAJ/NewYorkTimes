@@ -7,7 +7,7 @@
 //
 
 protocol SearchArticlesServiceApiProtocol {
-    
+    func search(query: String, pageIndex: UInt, completion: @escaping (Response<[Article]>) -> Void)
 }
 
 final class SearchArticlesServiceApi {
@@ -21,24 +21,22 @@ final class SearchArticlesServiceApi {
 // MARK: - SearchArticlesServiceApiProtocol
 
 extension SearchArticlesServiceApi: SearchArticlesServiceApiProtocol {
-    func search(query: String, pageIndex: UInt) {
-//        let responseCompletion: (Response<ContentResponse>) -> Void = { response in
-//            switch response {
-//            case .success(let contentResponse):
-//                switch contentResponse.status {
-//                case .ok:
-//                    completion(.success(contentResponse.contents))
-//                case .unknown:
-//                    completion(.failure(APIError.serverError.error))
-//                }
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//        
-//        let api: API = .searchArticles(query: query, pageIndex: pageIndex)
-//        request.object(from: api) { (response) in
-//            
-//        }
+    func search(query: String, pageIndex: UInt, completion: @escaping (Response<[Article]>) -> Void) {
+        let responseCompletion: (Response<SearchArticlesResponse>) -> Void = { response in
+            switch response {
+            case .success(let searchArticlesResponse):
+                switch searchArticlesResponse.status {
+                case .ok:
+                    completion(.success(searchArticlesResponse.articles ?? []))
+                case .unknown:
+                    completion(.failure(APIError.serverError.error))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        
+        let api: API = .searchArticles(query: query, pageIndex: pageIndex)
+        request.object(from: api, completion: responseCompletion)
     }
 }
