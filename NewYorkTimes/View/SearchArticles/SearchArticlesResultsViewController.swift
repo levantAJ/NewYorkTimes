@@ -14,6 +14,7 @@ final class SearchArticlesResultsViewController: UIViewController {
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
     var viewModel: SearchArticlesResultsViewModelProtocol!
+    weak var searchBar: UISearchBar?
     fileprivate var heightCalculatingCell: SearchArticlesResultsCollectionViewCell!
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +90,8 @@ extension SearchArticlesResultsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let articleViewModel = viewModel.articleViewModel(at: indexPath.item) as? SearchArticlesKeywordResultsCollectionViewCellProtocol else { return }
         loadingView.startAnimating()
+        searchBar?.text = articleViewModel.title
+        searchBar?.resignFirstResponder()
         viewModel.search(keyword: articleViewModel.title)
     }
 }

@@ -94,6 +94,7 @@ extension HomeViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = NSLocalizedString("Search Articles", comment: "")
         searchController.searchBar.delegate = searchArticlesVC
+        searchArticlesVC.searchBar = searchController.searchBar
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
